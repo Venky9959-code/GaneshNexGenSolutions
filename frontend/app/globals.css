@@ -1,0 +1,109 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg-primary: #f8fafc;
+    --bg-card: rgba(255, 255, 255, 0.9);
+    --border-card: rgba(226, 232, 240, 0.8);
+    --text-main: #0f172a;
+    --text-muted: #475569;
+    --accent: #2563eb;
+  }
+
+  .dark {
+    --bg-primary: #000000;
+    --bg-card: rgba(26, 26, 28, 0.75);
+    --border-card: rgba(255, 255, 255, 0.12);
+    --text-main: #f8fafc;
+    --text-muted: #86868b;
+    --accent: #2997ff;
+  }
+
+  body {
+    background-color: var(--bg-primary);
+    color: var(--text-main);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", sans-serif;
+    overflow-x: hidden;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+}
+
+/* Light mode text visibility rules */
+:root:not(.dark) .apple-glass {
+  background: rgba(255, 255, 255, 0.92);
+  border-color: rgba(226, 232, 240, 0.9);
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.05);
+}
+
+.apple-glass {
+  background: var(--bg-card);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border-card);
+  border-radius: 18px;
+}
+
+.apple-glass-hover {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.apple-glass-hover:hover {
+  transform: translateY(-2px);
+  border-color: rgba(41, 151, 255, 0.4);
+  box-shadow: 0 12px 30px -10px rgba(0, 102, 204, 0.15);
+}
+
+.apple-button {
+  background: #0071e3;
+  color: #ffffff;
+  border-radius: 980px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.apple-button:hover {
+  background: #0077ed;
+  transform: scale(1.02);
+}
+
+.apple-button-secondary {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-main);
+  border: 1px solid var(--border-card);
+  border-radius: 980px;
+  backdrop-filter: blur(10px);
+  transition: all 0.2s ease;
+}
+
+.apple-button-secondary:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+/* Ambient glow animations */
+@keyframes ambientGlow {
+  0% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.08); }
+  100% { opacity: 0.4; transform: scale(1); }
+}
+
+.animate-ambient {
+  animation: ambientGlow 8s ease-in-out infinite;
+}
+
+/* Custom sleek scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(134, 134, 139, 0.3);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(134, 134, 139, 0.6);
+}
