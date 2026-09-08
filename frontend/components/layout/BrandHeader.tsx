@@ -29,13 +29,17 @@ export default function BrandHeader() {
   }, []);
 
   const servicesList = [
-    { title: "Website Development", href: "/services/web-development", desc: "Next.js 16 high-performance business websites", icon: Globe },
-    { title: "E-Commerce Development", href: "/services/ecommerce-development", desc: "Online stores with payment & order management", icon: Zap },
-    { title: "Custom Software", href: "/services/custom-software", desc: "ASP.NET Core 9 enterprise business applications", icon: Code2 },
-    { title: "UI/UX Design", href: "/services/ui-ux-design", desc: "Modern user interfaces designed for conversion", icon: LayoutGrid },
-    { title: "AI & Automation", href: "/services/ai-automation", desc: "AI assistants & automated business workflows", icon: Bot },
-    { title: "Startup Solutions", href: "/services/startup-solutions", desc: "Idea validation, MVP planning & launch support", icon: ShieldCheck }
+    { title: "Website Development", href: "/services/web-development", desc: "Next.js 16 high-performance business websites & web apps", icon: Globe },
+    { title: "E-Commerce Development", href: "/services/ecommerce-development", desc: "Online stores with product catalog & Razorpay payment integration", icon: Zap },
+    { title: "Custom Software", href: "/services/custom-software", desc: "ASP.NET Core 9 enterprise business applications & APIs", icon: Code2 },
+    { title: "UI/UX Design", href: "/services/ui-ux-design", desc: "Modern user interfaces designed for usability & high conversion", icon: LayoutGrid },
+    { title: "AI & Automation", href: "/services/ai-automation", desc: "AI assistants, customer LLMs & WhatsApp automated workflows", icon: Bot },
+    { title: "Startup Solutions", href: "/services/startup-solutions", desc: "Idea validation, rapid MVP planning & product launch support", icon: ShieldCheck },
+    { title: "Cloud & Deployment", href: "/services/cloud-deployment", desc: "Azure, Vercel, Cloudflare, SSL, domains & CI/CD deployment", icon: Database },
+    { title: "Website Maintenance", href: "/services/maintenance", desc: "Security monitoring, daily backups, speed & uptime SLAs", icon: Smartphone }
   ];
+
+  const isServicesActive = pathname.startsWith("/services") || servicesOpen;
 
   return (
     <header className={`fixed top-0 inset-x-0 z-40 transition-all duration-300 ${
@@ -62,39 +66,77 @@ export default function BrandHeader() {
         </Link>
 
         {/* Desktop Navigation Links */}
-        <nav className="hidden lg:flex items-center gap-7 text-xs font-semibold text-slate-700 dark:text-zinc-300">
-          <Link href="/" className={`hover:text-blue-600 dark:hover:text-white transition ${pathname === "/" ? "text-blue-600 dark:text-blue-400" : ""}`}>
+        <nav className="hidden lg:flex items-center gap-6 text-xs font-semibold text-slate-700 dark:text-zinc-300">
+          <Link href="/" className={`hover:text-blue-600 dark:hover:text-white transition py-1.5 px-2.5 rounded-full ${pathname === "/" ? "text-blue-600 dark:text-blue-400 bg-blue-600/10 font-bold" : ""}`}>
             Home
           </Link>
-          <Link href="/about" className={`hover:text-blue-600 dark:hover:text-white transition ${pathname === "/about" ? "text-blue-600 dark:text-blue-400" : ""}`}>
+          <Link href="/about" className={`hover:text-blue-600 dark:hover:text-white transition py-1.5 px-2.5 rounded-full ${pathname === "/about" ? "text-blue-600 dark:text-blue-400 bg-blue-600/10 font-bold" : ""}`}>
             About Us
           </Link>
 
-          {/* Mega Menu Dropdown for Services */}
+          {/* Mega Menu Dropdown for Services with Active Tab Highlight and Solid Backdrop */}
           <div className="relative" onMouseEnter={() => setServicesOpen(true)} onMouseLeave={() => setServicesOpen(false)}>
-            <button className="flex items-center gap-1 hover:text-blue-600 dark:hover:text-white transition py-2">
+            <button 
+              className={`flex items-center gap-1.5 transition py-1.5 px-3 rounded-full text-xs font-semibold ${
+                isServicesActive 
+                  ? "bg-blue-600/10 text-blue-600 dark:text-blue-400 ring-1 ring-blue-500/30 font-bold shadow-sm" 
+                  : "hover:text-blue-600 dark:hover:text-white"
+              }`}
+            >
               <span>Services</span>
-              <ChevronDown className="w-3.5 h-3.5" />
+              <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${servicesOpen ? "rotate-180 text-blue-600 dark:text-blue-400" : ""}`} />
             </button>
 
             {servicesOpen && (
-              <div className="absolute top-full left-0 w-[540px] apple-glass p-4 border border-slate-200 dark:border-white/15 shadow-2xl grid grid-cols-2 gap-3 animate-in fade-in zoom-in-95 duration-150">
-                {servicesList.map((s, idx) => {
-                  const Icon = s.icon;
-                  return (
-                    <Link 
-                      key={idx} 
-                      href={s.href}
-                      className="p-3 rounded-xl hover:bg-blue-600/10 dark:hover:bg-blue-600/15 border border-transparent hover:border-blue-500/30 transition block group"
-                    >
-                      <div className="flex items-center gap-2.5 mb-1">
-                        <Icon className="w-4 h-4 text-blue-600 dark:text-blue-400" />
-                        <span className="text-xs font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-300 transition">{s.title}</span>
-                      </div>
-                      <p className="text-[10px] text-slate-600 dark:text-zinc-400 leading-tight">{s.desc}</p>
-                    </Link>
-                  );
-                })}
+              <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[620px] bg-white dark:bg-zinc-950 backdrop-blur-2xl p-5 rounded-2xl border border-slate-200 dark:border-white/15 shadow-2xl shadow-blue-500/10 z-50 animate-in fade-in zoom-in-95 duration-150">
+                <div className="flex items-center justify-between pb-3 mb-3 border-b border-slate-100 dark:border-white/10">
+                  <div>
+                    <span className="text-xs font-bold text-slate-900 dark:text-white">Our Engineering Services</span>
+                    <p className="text-[10px] text-slate-500 dark:text-zinc-400">Tailored digital products engineered for scale & conversion</p>
+                  </div>
+                  <Link 
+                    href="/services" 
+                    onClick={() => setServicesOpen(false)}
+                    className="text-[11px] font-semibold text-blue-600 dark:text-blue-400 hover:underline flex items-center gap-1"
+                  >
+                    <span>All Services</span>
+                    <ArrowRight className="w-3 h-3" />
+                  </Link>
+                </div>
+                <div className="grid grid-cols-2 gap-2.5">
+                  {servicesList.map((s, idx) => {
+                    const Icon = s.icon;
+                    const isCurrent = pathname === s.href;
+                    return (
+                      <Link 
+                        key={idx} 
+                        href={s.href}
+                        onClick={() => setServicesOpen(false)}
+                        className={`p-3 rounded-xl border transition block group ${
+                          isCurrent
+                            ? "bg-blue-50/80 dark:bg-blue-600/20 border-blue-500/40 text-blue-600 dark:text-blue-300"
+                            : "border-transparent hover:bg-blue-600/5 dark:hover:bg-blue-600/15 hover:border-blue-500/30"
+                        }`}
+                      >
+                        <div className="flex items-center gap-2.5 mb-1">
+                          <div className={`w-7 h-7 rounded-lg flex items-center justify-center shrink-0 ${
+                            isCurrent 
+                              ? "bg-blue-600 text-white" 
+                              : "bg-blue-500/10 text-blue-600 dark:text-blue-400 group-hover:bg-blue-600 group-hover:text-white transition-colors"
+                          }`}>
+                            <Icon className="w-3.5 h-3.5" />
+                          </div>
+                          <span className="text-xs font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-300 transition">
+                            {s.title}
+                          </span>
+                        </div>
+                        <p className="text-[10px] text-slate-600 dark:text-zinc-400 leading-tight pl-9">
+                          {s.desc}
+                        </p>
+                      </Link>
+                    );
+                  })}
+                </div>
               </div>
             )}
           </div>

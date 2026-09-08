@@ -5,13 +5,15 @@ import { useState } from "react";
 import { 
   Sparkles, ArrowRight, ShieldCheck, CheckCircle2, Code2, 
   Globe, Zap, Bot, LayoutGrid, Database, Smartphone, Lock, 
-  ChevronDown, HelpCircle, Building2, Store, ShoppingBag, 
-  GraduationCap, Stethoscope, Utensils, Home, Compass, Briefcase
+  ChevronDown, ChevronRight, HelpCircle, Building2, Store, ShoppingBag, 
+  GraduationCap, Stethoscope, Utensils, Home, Compass, Briefcase,
+  Activity, Terminal, Cpu, Server, Check, Layers
 } from "lucide-react";
 import InteractiveProposalCalculator from "@/components/InteractiveProposalCalculator";
 
 export default function HomePage() {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
+  const [activeHeroTab, setActiveHeroTab] = useState<'arch' | 'speed' | 'ai' | 'security'>('arch');
 
   const trustBadges = [
     "End-to-End Solutions",
@@ -71,68 +73,253 @@ export default function HomePage() {
   return (
     <div className="space-y-24 pb-16">
       {/* Hero Section */}
-      <section className="pt-32 pb-16 px-6 max-w-7xl mx-auto">
+      <section className="pt-32 pb-16 px-6 max-w-7xl mx-auto relative">
+        {/* Subtle Ambient Radial Glows */}
+        <div className="absolute top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-blue-600/15 dark:bg-blue-500/20 rounded-full blur-3xl pointer-events-none -z-10" />
+        <div className="absolute top-1/3 right-10 w-80 h-80 bg-indigo-500/10 dark:bg-cyan-500/10 rounded-full blur-3xl pointer-events-none -z-10" />
+
         <div className="grid lg:grid-cols-12 gap-12 items-center">
           <div className="lg:col-span-7 space-y-6">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-600/10 border border-blue-500/20 text-xs font-semibold text-blue-400">
-              <Sparkles className="w-3.5 h-3.5 text-blue-400" />
-              <span>Technology Solutions for Growing Businesses</span>
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-600/10 border border-blue-500/25 text-xs font-semibold text-blue-600 dark:text-blue-400 backdrop-blur-md">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+              </span>
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>Next-Gen Technology Engineering • Hyderabad & Across India</span>
             </div>
 
-            <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-tight font-heading">
+            <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-[1.1] font-heading">
               Build Smarter. <br />
-              <span className="text-blue-600 dark:text-blue-500">Grow Faster.</span> <br />
-              Go Digital.
+              <span className="bg-gradient-to-r from-blue-600 via-indigo-500 to-cyan-500 bg-clip-text text-transparent">
+                Scale Without Limits.
+              </span> <br />
+              Go Truly Digital.
             </h1>
 
             <p className="text-sm sm:text-base text-slate-600 dark:text-zinc-400 max-w-2xl leading-relaxed">
-              We help startups and businesses design, develop, launch, and scale powerful digital experiences through websites, custom software, AI automation, cloud solutions, and strategic technology consulting.
+              We engineer high-performance web applications, enterprise software architectures on ASP.NET Core 9, custom AI copilots, and cloud platforms that turn ambitious business ideas into high-revenue digital market leaders.
             </p>
 
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2">
               <Link 
                 href="/contact" 
-                className="px-8 py-3.5 rounded-full bg-blue-600 hover:bg-blue-500 text-white font-semibold text-sm transition flex items-center justify-center gap-2 shadow-xl shadow-blue-600/30"
+                className="px-8 py-3.5 rounded-full bg-blue-600 hover:bg-blue-500 text-white font-semibold text-sm transition flex items-center justify-center gap-2 shadow-xl shadow-blue-600/30 group"
               >
                 <span>Start Your Project</span>
-                <ArrowRight className="w-4 h-4" />
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
               <Link 
                 href="/services" 
                 className="px-8 py-3.5 rounded-full apple-glass border border-slate-200 dark:border-white/15 text-slate-800 dark:text-white font-semibold text-sm hover:bg-slate-200/60 dark:hover:bg-white/10 transition text-center"
               >
-                Explore Our Services
+                Explore 8 Core Services
               </Link>
             </div>
 
-            <div className="flex items-center gap-2 text-xs text-slate-600 dark:text-zinc-400 pt-2">
-              <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
-              <span>Free initial consultation • No obligation requirement review</span>
+            <div className="grid grid-cols-3 gap-4 pt-4 border-t border-slate-200 dark:border-white/10">
+              <div>
+                <div className="text-lg font-extrabold text-slate-900 dark:text-white font-heading">100/100</div>
+                <div className="text-[11px] text-slate-500 dark:text-zinc-400">Core Web Vitals</div>
+              </div>
+              <div>
+                <div className="text-lg font-extrabold text-slate-900 dark:text-white font-heading">&lt; 25ms</div>
+                <div className="text-[11px] text-slate-500 dark:text-zinc-400">Clean API Latency</div>
+              </div>
+              <div>
+                <div className="text-lg font-extrabold text-slate-900 dark:text-white font-heading">100%</div>
+                <div className="text-[11px] text-slate-500 dark:text-zinc-400">Code Ownership</div>
+              </div>
             </div>
           </div>
 
-          {/* Right Abstract Tech Visual */}
-          <div className="lg:col-span-5 apple-glass p-8 border border-slate-200 dark:border-white/15 relative shadow-2xl space-y-6">
-            <div className="w-12 h-12 rounded-2xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-600 dark:text-blue-400">
-              <Code2 className="w-6 h-6" />
-            </div>
-
-            <div>
-              <div className="text-xs font-semibold text-blue-600 dark:text-blue-400 uppercase tracking-widest mb-1">Architecture Standard</div>
-              <h3 className="text-xl font-bold text-slate-900 dark:text-white font-heading">Enterprise Engineering</h3>
-              <p className="text-xs text-slate-600 dark:text-zinc-400 mt-2 leading-relaxed">
-                From your first idea to a scalable digital business, Ganesh NexGen Solutions delivers technology designed for growth.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-2 gap-3 pt-2">
-              <div className="p-3 rounded-xl bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs">
-                <div className="font-bold text-slate-900 dark:text-white mb-0.5">Next.js 16</div>
-                <div className="text-[10px] text-slate-600 dark:text-zinc-400">Ultra-fast web UI</div>
+          {/* Right Interactive Architecture & System Console */}
+          <div className="lg:col-span-5 apple-glass overflow-hidden border border-slate-200 dark:border-white/15 shadow-2xl bg-white/85 dark:bg-zinc-950/85 backdrop-blur-2xl rounded-2xl">
+            {/* Terminal Header */}
+            <div className="px-5 py-3.5 border-b border-slate-200 dark:border-white/10 flex items-center justify-between bg-slate-50 dark:bg-white/5">
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 rounded-full bg-rose-500/80" />
+                <div className="w-3 h-3 rounded-full bg-amber-500/80" />
+                <div className="w-3 h-3 rounded-full bg-emerald-500/80" />
+                <span className="text-[10px] font-mono font-bold text-slate-500 dark:text-zinc-400 ml-2">
+                  NexGen System Console
+                </span>
               </div>
-              <div className="p-3 rounded-xl bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs">
-                <div className="font-bold text-slate-900 dark:text-white mb-0.5">ASP.NET Core 9</div>
-                <div className="text-[10px] text-slate-600 dark:text-zinc-400">CQRS Clean API</div>
+              <div className="flex items-center gap-1.5 text-[10px] font-mono text-emerald-600 dark:text-emerald-400 font-semibold">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                <span>Live 18ms</span>
+              </div>
+            </div>
+
+            {/* Interactive Tabs */}
+            <div className="grid grid-cols-4 p-2 bg-slate-100/80 dark:bg-white/5 border-b border-slate-200 dark:border-white/10 gap-1 text-[10px] font-bold">
+              {[
+                { id: 'arch', label: 'Architecture', icon: Server },
+                { id: 'speed', label: 'Core Vitals', icon: Zap },
+                { id: 'ai', label: 'AI Copilot', icon: Bot },
+                { id: 'security', label: 'Security', icon: Lock }
+              ].map((tab) => {
+                const Icon = tab.icon;
+                const isActive = activeHeroTab === tab.id;
+                return (
+                  <button
+                    key={tab.id}
+                    onClick={() => setActiveHeroTab(tab.id as any)}
+                    className={`py-1.5 px-2 rounded-lg flex items-center justify-center gap-1 transition ${
+                      isActive 
+                        ? "bg-blue-600 text-white shadow-sm" 
+                        : "text-slate-600 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-white"
+                    }`}
+                  >
+                    <Icon className="w-3 h-3" />
+                    <span>{tab.label}</span>
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Tab Viewport */}
+            <div className="p-6 space-y-4 min-h-[280px] flex flex-col justify-between">
+              {activeHeroTab === 'arch' && (
+                <div className="space-y-3 animate-in fade-in duration-200">
+                  <div className="flex items-center justify-between text-xs">
+                    <span className="font-bold text-slate-900 dark:text-white">Full-Stack Enterprise Blueprint</span>
+                    <span className="text-[10px] font-mono text-blue-600 dark:text-blue-400 font-semibold">Production Ready</span>
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <div className="p-2.5 rounded-xl bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 flex items-center justify-between text-xs">
+                      <div className="flex items-center gap-2.5">
+                        <div className="w-7 h-7 rounded-lg bg-blue-600/10 text-blue-600 dark:text-blue-400 flex items-center justify-center font-bold font-mono text-[11px]">
+                          UI
+                        </div>
+                        <div>
+                          <div className="font-bold text-slate-900 dark:text-white">Next.js 16 App Router</div>
+                          <div className="text-[10px] text-slate-500 dark:text-zinc-400">SSR + Edge Caching + Tailwind CSS</div>
+                        </div>
+                      </div>
+                      <span className="text-[10px] font-mono text-emerald-600 dark:text-emerald-400 font-bold">100/100</span>
+                    </div>
+
+                    <div className="p-2.5 rounded-xl bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 flex items-center justify-between text-xs">
+                      <div className="flex items-center gap-2.5">
+                        <div className="w-7 h-7 rounded-lg bg-indigo-600/10 text-indigo-600 dark:text-indigo-400 flex items-center justify-center font-bold font-mono text-[11px]">
+                          API
+                        </div>
+                        <div>
+                          <div className="font-bold text-slate-900 dark:text-white">ASP.NET Core 9 Web API</div>
+                          <div className="text-[10px] text-slate-500 dark:text-zinc-400">CQRS Pattern + MediatR Clean Arch</div>
+                        </div>
+                      </div>
+                      <span className="text-[10px] font-mono text-emerald-600 dark:text-emerald-400 font-bold">&lt; 20ms</span>
+                    </div>
+
+                    <div className="p-2.5 rounded-xl bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 flex items-center justify-between text-xs">
+                      <div className="flex items-center gap-2.5">
+                        <div className="w-7 h-7 rounded-lg bg-emerald-600/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold font-mono text-[11px]">
+                          DB
+                        </div>
+                        <div>
+                          <div className="font-bold text-slate-900 dark:text-white">PostgreSQL ACID Engine</div>
+                          <div className="text-[10px] text-slate-500 dark:text-zinc-400">EF Core + Automated Migrations</div>
+                        </div>
+                      </div>
+                      <span className="text-[10px] font-mono text-emerald-600 dark:text-emerald-400 font-bold">ACID</span>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {activeHeroTab === 'speed' && (
+                <div className="space-y-4 animate-in fade-in duration-200">
+                  <div className="text-xs font-bold text-slate-900 dark:text-white">Google Lighthouse Performance Score</div>
+                  <div className="grid grid-cols-4 gap-2 text-center py-2">
+                    {[
+                      { metric: 'Performance', score: '100' },
+                      { metric: 'Accessibility', score: '100' },
+                      { metric: 'Best Practices', score: '100' },
+                      { metric: 'SEO', score: '100' }
+                    ].map((item, idx) => (
+                      <div key={idx} className="p-2.5 rounded-xl bg-emerald-500/10 border border-emerald-500/20">
+                        <div className="text-xl font-extrabold text-emerald-600 dark:text-emerald-400 font-heading">
+                          {item.score}
+                        </div>
+                        <div className="text-[9px] text-slate-600 dark:text-zinc-300 font-bold mt-1">
+                          {item.metric}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="p-2.5 rounded-xl bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs space-y-1">
+                    <div className="flex justify-between text-[11px]">
+                      <span className="text-slate-500 dark:text-zinc-400">First Contentful Paint (FCP)</span>
+                      <span className="font-mono font-bold text-emerald-600 dark:text-emerald-400">0.4s</span>
+                    </div>
+                    <div className="flex justify-between text-[11px]">
+                      <span className="text-slate-500 dark:text-zinc-400">Largest Contentful Paint (LCP)</span>
+                      <span className="font-mono font-bold text-emerald-600 dark:text-emerald-400">0.8s</span>
+                    </div>
+                    <div className="flex justify-between text-[11px]">
+                      <span className="text-slate-500 dark:text-zinc-400">Cumulative Layout Shift (CLS)</span>
+                      <span className="font-mono font-bold text-emerald-600 dark:text-emerald-400">0.00</span>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {activeHeroTab === 'ai' && (
+                <div className="space-y-3 animate-in fade-in duration-200">
+                  <div className="text-xs font-bold text-slate-900 dark:text-white flex items-center justify-between">
+                    <span>WhatsApp / Web AI Copilot</span>
+                    <span className="text-[10px] font-mono text-emerald-600 dark:text-emerald-400 font-semibold">Active Agent</span>
+                  </div>
+                  <div className="space-y-2 text-[11px]">
+                    <div className="p-2.5 rounded-xl bg-slate-100 dark:bg-white/5 text-slate-700 dark:text-zinc-300 border border-slate-200 dark:border-white/10 max-w-[85%]">
+                      &quot;Hi, can I get a quotation for an e-commerce website with Razorpay payment?&quot;
+                    </div>
+                    <div className="p-2.5 rounded-xl bg-blue-600/10 dark:bg-blue-600/20 text-blue-900 dark:text-blue-200 border border-blue-500/30 max-w-[90%] ml-auto">
+                      &quot;Certainly! Our Growth E-Commerce tier starts at ₹30,000 including UPI/Card checkout, WhatsApp tracking, and inventory dashboard. Would you like a demo?&quot;
+                    </div>
+                  </div>
+                  <div className="text-[10px] text-slate-500 dark:text-zinc-400 flex items-center justify-between pt-1 font-mono">
+                    <span>Model: Claude 3.5 Sonnet / GPT-4o</span>
+                    <span className="text-emerald-600 dark:text-emerald-400">Latency: 720ms</span>
+                  </div>
+                </div>
+              )}
+
+              {activeHeroTab === 'security' && (
+                <div className="space-y-3 animate-in fade-in duration-200">
+                  <div className="text-xs font-bold text-slate-900 dark:text-white">Enterprise Security Verification</div>
+                  <div className="space-y-2">
+                    {[
+                      { check: 'TLS 1.3 High-Grade SSL Encryption', status: 'Enforced' },
+                      { check: 'JWT + Refresh Token RBAC Authentication', status: 'Verified' },
+                      { check: 'PostgreSQL ACID Automated Daily Snapshots', status: 'Automated' },
+                      { check: 'Zero Proprietary Data Retention (NDA)', status: 'Compliant' }
+                    ].map((sec, idx) => (
+                      <div key={idx} className="p-2 rounded-xl bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 flex items-center justify-between text-xs">
+                        <div className="flex items-center gap-2">
+                          <Check className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 shrink-0" />
+                          <span className="text-slate-800 dark:text-zinc-200 font-medium text-[11px]">{sec.check}</span>
+                        </div>
+                        <span className="text-[10px] font-mono font-bold text-emerald-600 dark:text-emerald-400">{sec.status}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Bottom Quick-Action in Console */}
+              <div className="pt-3 border-t border-slate-200 dark:border-white/10 flex items-center justify-between text-xs">
+                <span className="text-[10px] text-slate-500 dark:text-zinc-400">Hyderabad, India • Serving Globally</span>
+                <Link 
+                  href="/contact" 
+                  className="text-[11px] font-bold text-blue-600 dark:text-blue-400 hover:underline flex items-center gap-1"
+                >
+                  <span>Build with NexGen</span>
+                  <ChevronRight className="w-3 h-3" />
+                </Link>
               </div>
             </div>
           </div>
