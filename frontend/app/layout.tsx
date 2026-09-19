@@ -1,13 +1,15 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import BrandHeader from "@/components/layout/BrandHeader";
-import Footer from "@/components/layout/Footer";
-import FloatingWhatsApp from "@/components/FloatingWhatsApp";
-import ChatBot from "@/components/ChatBot";
+import AppShell from "@/components/AppShell";
+import { IS_UNDER_PROCESS } from "@/lib/maintenance";
 
 export const metadata: Metadata = {
-  title: "Ganesh NexGen Solutions | Your Growth. Our Technology.",
-  description: "Enterprise web development, custom software development, AI automation, cloud solutions, and technology consulting for growing businesses across India.",
+  title: IS_UNDER_PROCESS 
+    ? "Website Under Process | Ganesh NexGen Solutions" 
+    : "Ganesh NexGen Solutions | Your Growth. Our Technology.",
+  description: IS_UNDER_PROCESS
+    ? "Our website is currently undergoing a scheduled system upgrade to bring you a faster, smarter, and next-generation digital experience. We will be back online shortly."
+    : "Enterprise web development, custom software development, AI automation, cloud solutions, and technology consulting for growing businesses across India.",
   keywords: "website development company India, business website development, custom software development India, startup website development, ecommerce development company, AI automation services",
   icons: {
     icon: [
@@ -18,7 +20,9 @@ export const metadata: Metadata = {
     apple: "/brand/logo-icon.png",
   },
   openGraph: {
-    title: "Ganesh NexGen Solutions | Your Growth. Our Technology.",
+    title: IS_UNDER_PROCESS 
+      ? "Website Under Process | Ganesh NexGen Solutions" 
+      : "Ganesh NexGen Solutions | Your Growth. Our Technology.",
     description: "Enterprise technology and digital transformation company serving startups, SMEs, healthcare, retail, and growing businesses across India.",
     url: "https://ganeshnexgen.com",
     siteName: "Ganesh NexGen Solutions",
@@ -58,13 +62,9 @@ export default function RootLayout({
         />
       </head>
       <body className="bg-[var(--bg-primary)] text-[var(--text-main)] antialiased selection:bg-blue-500 selection:text-white flex flex-col min-h-screen transition-colors duration-300">
-        <BrandHeader />
-        <main className="flex-1">
+        <AppShell>
           {children}
-        </main>
-        <Footer />
-        <FloatingWhatsApp />
-        <ChatBot />
+        </AppShell>
       </body>
     </html>
   );
