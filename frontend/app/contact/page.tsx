@@ -1,272 +1,384 @@
 "use client";
 
-import { useState } from "react";
-import Link from "next/link";
-import { 
-  ShieldCheck, Mail, Phone, MapPin, Sparkles, MessageSquare, 
-  Clock, CheckCircle2, Copy, Check, ArrowRight, ChevronDown, Calendar, Users
-} from "lucide-react";
-import ContactForm from "@/components/ContactForm";
+import React, { useState } from "react";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import FloatingEnquiry from "@/components/FloatingEnquiry";
+import { SparkIcon } from "@/components/Icons";
+
+const SERVICES = [
+  "Custom Software / ERP",
+  "High-Converting Website",
+  "AI WhatsApp Bot",
+  "E-Commerce Store",
+  "Mobile App (iOS/Android)",
+  "Full Digital Overhaul",
+];
+
+const BUDGETS = [
+  "₹25,000 – ₹50,000",
+  "₹50,000 – ₹1.5 Lakh",
+  "₹1.5 Lakh – ₹5 Lakh",
+  "₹5 Lakh+ (Enterprise)",
+];
+
+const TIMELINES = [
+  "Immediately (< 2 weeks)",
+  "Within 1 month",
+  "Next 2-3 months",
+  "Flexible / Planning phase",
+];
 
 export default function ContactPage() {
-  const [copiedEmail, setCopiedEmail] = useState(false);
-  const [copiedPhone, setCopiedPhone] = useState(false);
-  const [selectedPill, setSelectedPill] = useState("Website Development");
-  const [openFaq, setOpenFaq] = useState<number | null>(0);
+  const [step, setStep] = useState(1);
+  const [service, setService] = useState("");
+  const [budget, setBudget] = useState("");
+  const [timeline, setTimeline] = useState("");
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+  const [notes, setNotes] = useState("");
+  const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [leadId, setLeadId] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
 
-  const handleCopy = (text: string, type: 'email' | 'phone') => {
-    navigator.clipboard.writeText(text);
-    if (type === 'email') {
-      setCopiedEmail(true);
-      setTimeout(() => setCopiedEmail(false), 2000);
-    } else {
-      setCopiedPhone(true);
-      setTimeout(() => setCopiedPhone(false), 2000);
+  const handleEmailRedirect = () => {
+    const subject = encodeURIComponent(`Project Inquiry: ${service || "Custom Software"}`);
+    const body = encodeURIComponent(
+      `Hi Ganesh NexGen Team,\n\nI want to discuss a project:\n- Service: ${service || "Custom Software"}\n- Budget: ${budget || "To Discuss"}\n- Timeline: ${timeline || "Flexible"}\n- Name: ${name}\n- Contact: ${phone || email}\n- Notes: ${notes || "N/A"}`
+    );
+    window.open(`mailto:contact@ganeshnexgen.com?subject=${subject}&body=${body}`, "_blank");
+    setSubmitted(true);
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setErrorMsg("");
+
+    try {
+      const res = await fetch("/api/inquiry", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          service: service || "Custom Software / Web",
+          budget: budget || "To Discuss",
+          timeline: timeline || "Flexible",
+          name,
+          phone,
+          email,
+          notes,
+        }),
+      });
+
+      const data = await res.json();
+      if (data.success) {
+        setLeadId(data.leadNumber);
+        setSubmitted(true);
+      } else {
+        setErrorMsg(data.error || "Submission error. Please try again.");
+      }
+    } catch (err) {
+      console.error(err);
+      setSubmitted(true);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
-  const projectTypes = [
-    "Website Development",
-    "E-Commerce Store",
-    "Custom Software / API",
-    "AI & Automation",
-    "Startup MVP",
-    "UI/UX Design",
-    "Cloud & DevOps",
-    "System Maintenance"
-  ];
-
-  const contactFaqs = [
-    {
-      q: "Do you sign a Non-Disclosure Agreement (NDA)?",
-      a: "Yes. Before discussing any sensitive business logic, proprietary data, or startup ideas, we are happy to sign a mutual NDA to guarantee 100% confidentiality."
-    },
-    {
-      q: "How soon will I receive a proposal or scope estimate?",
-      a: "After our initial technical discovery call, we prepare a detailed milestone roadmap, architecture plan, and cost breakdown within 24 to 48 business hours."
-    },
-    {
-      q: "Can we schedule an in-person meeting in Hyderabad?",
-      a: "Yes! Our engineering team is based in Hyderabad. We welcome in-person architecture strategy sessions by scheduled appointment."
-    },
-    {
-      q: "What if I only have a rough concept and no technical documentation?",
-      a: "That is completely fine. Our technical consultants will guide you through feature prioritization, user stories, and architecture requirements during our free initial discovery."
-    }
-  ];
-
   return (
-    <div className="pt-32 pb-20 px-6 max-w-7xl mx-auto space-y-16">
-      {/* Header Section */}
-      <div className="text-center space-y-4 max-w-3xl mx-auto">
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-600/10 border border-blue-500/20 text-xs font-semibold text-blue-600 dark:text-blue-400">
-          <Sparkles className="w-3.5 h-3.5" /> Start Your Transformation
-        </div>
-        <h1 className="text-4xl sm:text-5xl font-extrabold text-slate-900 dark:text-white font-heading tracking-tight">
-          Let&apos;s Build Your Next Digital Milestone
-        </h1>
-        <p className="text-sm sm:text-base text-slate-600 dark:text-zinc-400 leading-relaxed">
-          Connect directly with our lead architects. Whether you need a high-converting web platform, custom ASP.NET Core 9 software, or AI automation, we are here to guide your strategy.
-        </p>
+    <main className="min-h-screen bg-[#F0F4F8] text-[#0B172A]">
+      <Navbar />
+      <FloatingEnquiry />
 
-        {/* Live SLA Badge */}
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-xs text-emerald-700 dark:text-emerald-400 font-semibold">
-          <Clock className="w-3.5 h-3.5" />
-          <span>Guaranteed Technical Response within 2 Business Hours</span>
-        </div>
-      </div>
-
-      {/* Quick Select Category Pills */}
-      <div className="space-y-3 max-w-4xl mx-auto text-center">
-        <div className="text-xs font-bold text-slate-500 dark:text-zinc-400 uppercase tracking-wider">
-          Select Your Project Focus
-        </div>
-        <div className="flex flex-wrap justify-center gap-2">
-          {projectTypes.map((type, idx) => (
-            <button
-              key={idx}
-              onClick={() => setSelectedPill(type)}
-              className={`px-3.5 py-1.5 rounded-full text-xs font-semibold transition cursor-pointer ${
-                selectedPill === type 
-                  ? "bg-blue-600 text-white shadow-md shadow-blue-500/20 scale-105" 
-                  : "bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 text-slate-700 dark:text-zinc-300 border border-slate-200 dark:border-white/10"
-              }`}
-            >
-              {type}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      <div className="grid lg:grid-cols-12 gap-8 items-start">
-        {/* Left Column: Direct Multi-Channel Connect */}
-        <div className="lg:col-span-5 space-y-6">
-          <div className="apple-glass p-8 space-y-6 bg-white/80 dark:bg-zinc-900/60 border border-slate-200 dark:border-white/10 shadow-xl">
-            <div>
-              <span className="text-[10px] font-mono font-bold text-blue-600 dark:text-blue-400 uppercase tracking-wider">
-                Direct Engineering Channels
-              </span>
-              <h3 className="text-xl font-bold text-slate-900 dark:text-white font-heading mt-0.5">
-                Fast-Track Communication
-              </h3>
-              <p className="text-xs text-slate-500 dark:text-zinc-400 mt-1">
-                Skip the ticket queue. Reach our technical leads across your preferred channel.
-              </p>
-            </div>
-
-            <div className="space-y-4 text-xs">
-              {/* WhatsApp Quick Connect */}
-              <a 
-                href="https://wa.me/919390564946?text=Hi%20Ganesh%20NexGen%20Solutions,%20I%20would%20like%20to%20discuss%20a%20project." 
-                target="_blank" 
-                rel="noreferrer"
-                className="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/20 hover:border-emerald-500/40 flex items-center justify-between group transition block"
-              >
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-emerald-500 text-white flex items-center justify-center shrink-0 shadow-md shadow-emerald-500/20">
-                    <MessageSquare className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <div className="font-bold text-slate-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition">
-                      Instant WhatsApp Chat
-                    </div>
-                    <div className="text-slate-500 dark:text-zinc-400">+91 9390564946</div>
-                  </div>
-                </div>
-                <ArrowRight className="w-4 h-4 text-emerald-600 dark:text-emerald-400 group-hover:translate-x-1 transition-transform" />
-              </a>
-
-              {/* Email Direct */}
-              <div className="p-4 rounded-xl bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-blue-500/10 border border-blue-500/20 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0">
-                    <Mail className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <div className="font-bold text-slate-900 dark:text-white">Email Consultation</div>
-                    <div className="text-slate-500 dark:text-zinc-400 font-mono text-[11px]">contact@ganeshnexgen.com</div>
-                  </div>
-                </div>
-                <button
-                  onClick={() => handleCopy("contact@ganeshnexgen.com", 'email')}
-                  className="p-2 rounded-lg hover:bg-slate-200 dark:hover:bg-white/10 text-slate-500 dark:text-zinc-400 transition"
-                  title="Copy email"
-                >
-                  {copiedEmail ? <Check className="w-4 h-4 text-emerald-500" /> : <Copy className="w-4 h-4" />}
-                </button>
-              </div>
-
-              {/* Phone Line */}
-              <div className="p-4 rounded-xl bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-blue-500/10 border border-blue-500/20 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0">
-                    <Phone className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <div className="font-bold text-slate-900 dark:text-white">Direct Phone Line</div>
-                    <div className="text-slate-500 dark:text-zinc-400 font-mono text-[11px]">+91 9390564946</div>
-                  </div>
-                </div>
-                <button
-                  onClick={() => handleCopy("+919390564946", 'phone')}
-                  className="p-2 rounded-lg hover:bg-slate-200 dark:hover:bg-white/10 text-slate-500 dark:text-zinc-400 transition"
-                  title="Copy phone"
-                >
-                  {copiedPhone ? <Check className="w-4 h-4 text-emerald-500" /> : <Copy className="w-4 h-4" />}
-                </button>
-              </div>
-
-              {/* Physical Tech Hub */}
-              <div className="p-4 rounded-xl bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-blue-500/10 border border-blue-500/20 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0">
-                  <MapPin className="w-5 h-5" />
-                </div>
-                <div>
-                  <div className="font-bold text-slate-900 dark:text-white">Engineering Hub</div>
-                  <div className="text-slate-500 dark:text-zinc-400 leading-tight">Hyderabad, Telangana, India (Serving Global Clients)</div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Privacy & NDA Guarantee Banner */}
-          <div className="p-6 apple-glass border border-emerald-500/20 dark:border-emerald-500/10 bg-white/70 dark:bg-zinc-900/60 text-xs space-y-2.5">
-            <div className="flex items-center gap-2 text-emerald-600 dark:text-emerald-400 font-bold">
-              <ShieldCheck className="w-5 h-5 shrink-0" />
-              <span>Enterprise Confidentiality & NDA Standard</span>
-            </div>
-            <p className="text-slate-500 dark:text-zinc-400 leading-relaxed pl-7">
-              All discussions, architecture concepts, and project details are kept strictly confidential. Your data is stored securely in our private PostgreSQL CRM with zero third-party leakage.
-            </p>
-          </div>
-
-          {/* 3 Steps After Inquiring */}
-          <div className="p-6 apple-glass border border-slate-200 dark:border-white/10 bg-white/70 dark:bg-zinc-900/60 text-xs space-y-3">
-            <div className="font-bold text-slate-900 dark:text-white font-heading">
-              What Happens Next?
-            </div>
-            <div className="space-y-2.5">
-              {[
-                { step: "1", title: "Discovery Call", desc: "We review your requirements and align on scope." },
-                { step: "2", title: "Architecture & Proposal", desc: "Detailed timeline, milestone roadmap, and transparent quote." },
-                { step: "3", title: "Sprint Kickoff", desc: "Direct Slack/WhatsApp group with your dedicated engineering team." }
-              ].map((s, idx) => (
-                <div key={idx} className="flex items-start gap-2.5">
-                  <div className="w-5 h-5 rounded-full bg-blue-600 text-white font-bold text-[10px] flex items-center justify-center shrink-0 mt-0.5">
-                    {s.step}
-                  </div>
-                  <div>
-                    <span className="font-bold text-slate-900 dark:text-white">{s.title}:</span>{" "}
-                    <span className="text-slate-500 dark:text-zinc-400">{s.desc}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Right Column: Interactive Contact Form */}
-        <div className="lg:col-span-7 space-y-6">
-          <ContactForm defaultService={selectedPill} />
-        </div>
-      </div>
-
-      {/* Contact FAQ Accordion */}
-      <div className="space-y-6 max-w-4xl mx-auto pt-8 border-t border-slate-200 dark:border-white/10">
-        <div className="text-center space-y-2">
-          <h2 className="text-2xl font-bold text-slate-900 dark:text-white font-heading">
-            Frequently Asked Questions
-          </h2>
-          <p className="text-xs text-slate-500 dark:text-zinc-400">
-            Clear answers before starting your collaboration with Ganesh NexGen Solutions.
+      <section className="dot-grid pt-28 pb-16 sm:pt-36 sm:pb-24 border-b-2 border-ink">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 text-center">
+          <p className="font-display text-xs sm:text-sm font-bold tracking-[0.2em] text-[#2D8CF0]">
+            START A PROJECT
           </p>
-        </div>
+          <h1 className="mt-3 font-display text-4xl sm:text-7xl font-black uppercase tracking-tight text-ink">
+            Tell us your vision.
+            <span className="block text-[#2D8CF0]">We cook the software.</span>
+          </h1>
+          <p className="mt-4 max-w-md mx-auto text-base sm:text-lg font-semibold text-[#4A5970]">
+            Four quick steps. No endless forms, no calls if you don&apos;t want them. Direct engineer response in 24 hours.
+          </p>
 
-        <div className="space-y-3">
-          {contactFaqs.map((faq, idx) => {
-            const isOpen = openFaq === idx;
-            return (
-              <div 
-                key={idx} 
-                className="apple-glass border border-slate-200 dark:border-white/10 bg-white/80 dark:bg-zinc-900/60 overflow-hidden"
-              >
-                <button
-                  onClick={() => setOpenFaq(isOpen ? null : idx)}
-                  className="w-full p-4 text-left flex items-center justify-between text-xs sm:text-sm font-bold text-slate-900 dark:text-white"
-                >
-                  <span>{faq.q}</span>
-                  <ChevronDown className={`w-4 h-4 transition-transform duration-200 shrink-0 ml-4 ${isOpen ? "rotate-180 text-blue-600" : ""}`} />
-                </button>
-                {isOpen && (
-                  <div className="px-4 pb-4 text-xs text-slate-600 dark:text-zinc-400 leading-relaxed border-t border-slate-100 dark:border-white/5 pt-3 animate-in fade-in duration-150">
-                    {faq.a}
-                  </div>
-                )}
-              </div>
-            );
-          })}
+          {/* Quick Direct Email row */}
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+            <a
+              href="mailto:contact@ganeshnexgen.com"
+              className="inline-flex items-center gap-2 rounded-full border-2 border-ink bg-white px-5 py-2 font-display text-xs sm:text-sm font-bold text-ink shadow-[3px_3px_0_0_#0B172A] hover:bg-[#A1D5F5] transition-all"
+            >
+              <span>✉</span> Email: contact@ganeshnexgen.com
+            </a>
+          </div>
         </div>
-      </div>
-    </div>
+      </section>
+
+      <section className="mx-auto max-w-2xl px-4 py-16 sm:py-24">
+        <div className="rounded-3xl border-2 border-ink bg-white p-6 sm:p-10 shadow-[8px_8px_0_0_#0B172A]">
+          {submitted ? (
+            <div className="py-12 text-center">
+              <div className="mx-auto grid size-20 place-items-center rounded-2xl bg-white border-2 border-ink shadow-[4px_4px_0_0_#2D8CF0] p-3">
+                <img
+                  src="/brand/logo.png"
+                  alt="Ganesh NexGen Co"
+                  className="size-14 object-contain"
+                />
+              </div>
+              <h2 className="mt-6 font-display text-3xl font-black uppercase tracking-tight text-ink">
+                Inquiry Received!
+              </h2>
+              {leadId && (
+                <span className="mt-3 inline-block rounded-full border-2 border-ink bg-yellow px-4 py-1.5 font-mono text-sm font-bold text-ink shadow-xs">
+                  Reference: {leadId}
+                </span>
+              )}
+              <p className="mt-3 text-base font-semibold text-[#4A5970] max-w-md mx-auto">
+                Thanks {name || "friend"}! We have received your project details. Our lead engineer will review and reach out within 24 hours.
+              </p>
+              <button
+                onClick={() => {
+                  setSubmitted(false);
+                  setLeadId("");
+                  setStep(1);
+                }}
+                className="mt-8 rounded-full border-2 border-ink bg-[#2D8CF0] px-8 py-3.5 font-display text-sm font-black text-white shadow-[4px_4px_0_0_#0B172A] hover:bg-[#1A4A8E] transition-colors cursor-pointer"
+              >
+                SUBMIT ANOTHER INQUIRY
+              </button>
+            </div>
+          ) : (
+            <div>
+              {/* Step 1 */}
+              {step === 1 && (
+                <div>
+                  <div className="flex items-center justify-between border-b-2 border-ink pb-3 mb-6">
+                    <span className="font-display text-xs font-black tracking-widest text-[#2D8CF0] uppercase">
+                      STEP 1 OF 4
+                    </span>
+                    <span className="font-display text-xs font-bold text-[#4A5970]">SERVICE</span>
+                  </div>
+                  <h2 className="font-display text-2xl sm:text-3xl font-black text-ink">
+                    What would you like built?
+                  </h2>
+                  <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    {SERVICES.map((s) => (
+                      <button
+                        key={s}
+                        type="button"
+                        onClick={() => setService(s)}
+                        className={`rounded-2xl border-2 border-ink p-4 text-left font-display text-sm font-bold transition-all shadow-[3px_3px_0_0_#0B172A] cursor-pointer ${
+                          service === s
+                            ? "bg-[#2D8CF0] text-white scale-105"
+                            : "bg-[#F0F4F8] text-ink hover:bg-[#A1D5F5]"
+                        }`}
+                      >
+                        {s}
+                      </button>
+                    ))}
+                  </div>
+                  <div className="mt-8 flex justify-end">
+                    <button
+                      disabled={!service}
+                      onClick={() => setStep(2)}
+                      className="rounded-full border-2 border-ink bg-[#0B172A] px-8 py-3 font-display text-xs sm:text-sm font-black text-white shadow-[4px_4px_0_0_#2D8CF0] disabled:opacity-40 hover:bg-[#2D8CF0] transition-colors cursor-pointer"
+                    >
+                      CONTINUE TO BUDGET →
+                    </button>
+                  </div>
+                </div>
+              )}
+
+              {/* Step 2 */}
+              {step === 2 && (
+                <div>
+                  <div className="flex items-center justify-between border-b-2 border-ink pb-3 mb-6">
+                    <span className="font-display text-xs font-black tracking-widest text-[#2D8CF0] uppercase">
+                      STEP 2 OF 4
+                    </span>
+                    <span className="font-display text-xs font-bold text-[#4A5970]">BUDGET</span>
+                  </div>
+                  <h2 className="font-display text-2xl sm:text-3xl font-black text-ink">
+                    What is your target budget?
+                  </h2>
+                  <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    {BUDGETS.map((b) => (
+                      <button
+                        key={b}
+                        type="button"
+                        onClick={() => setBudget(b)}
+                        className={`rounded-2xl border-2 border-ink p-4 text-left font-display text-sm font-bold transition-all shadow-[3px_3px_0_0_#0B172A] cursor-pointer ${
+                          budget === b
+                            ? "bg-[#2D8CF0] text-white scale-[1.02]"
+                            : "bg-[#F0F4F8] text-ink hover:bg-[#A1D5F5]"
+                        }`}
+                      >
+                        {b}
+                      </button>
+                    ))}
+                  </div>
+                  <div className="mt-8 flex justify-between">
+                    <button
+                      onClick={() => setStep(1)}
+                      className="rounded-full border-2 border-ink bg-[#F0F4F8] px-6 py-2.5 font-display text-xs font-bold text-ink cursor-pointer"
+                    >
+                      ← BACK
+                    </button>
+                    <button
+                      disabled={!budget}
+                      onClick={() => setStep(3)}
+                      className="rounded-full border-2 border-ink bg-[#0B172A] px-8 py-3 font-display text-xs sm:text-sm font-black text-white shadow-[4px_4px_0_0_#2D8CF0] disabled:opacity-40 hover:bg-[#2D8CF0] transition-colors cursor-pointer"
+                    >
+                      CONTINUE TO TIMELINE →
+                    </button>
+                  </div>
+                </div>
+              )}
+
+              {/* Step 3 */}
+              {step === 3 && (
+                <div>
+                  <div className="flex items-center justify-between border-b-2 border-ink pb-3 mb-6">
+                    <span className="font-display text-xs font-black tracking-widest text-[#2D8CF0] uppercase">
+                      STEP 3 OF 4
+                    </span>
+                    <span className="font-display text-xs font-bold text-[#4A5970]">TIMELINE</span>
+                  </div>
+                  <h2 className="font-display text-2xl sm:text-3xl font-black text-ink">
+                    When do you want to launch?
+                  </h2>
+                  <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    {TIMELINES.map((t) => (
+                      <button
+                        key={t}
+                        type="button"
+                        onClick={() => setTimeline(t)}
+                        className={`rounded-2xl border-2 border-ink p-4 text-left font-display text-sm font-bold transition-all shadow-[3px_3px_0_0_#0B172A] cursor-pointer ${
+                          timeline === t
+                            ? "bg-[#2D8CF0] text-white scale-[1.02]"
+                            : "bg-[#F0F4F8] text-ink hover:bg-[#A1D5F5]"
+                        }`}
+                      >
+                        {t}
+                      </button>
+                    ))}
+                  </div>
+                  <div className="mt-8 flex justify-between">
+                    <button
+                      onClick={() => setStep(2)}
+                      className="rounded-full border-2 border-ink bg-[#F0F4F8] px-6 py-2.5 font-display text-xs font-bold text-ink cursor-pointer"
+                    >
+                      ← BACK
+                    </button>
+                    <button
+                      disabled={!timeline}
+                      onClick={() => setStep(4)}
+                      className="rounded-full border-2 border-ink bg-[#0B172A] px-8 py-3 font-display text-xs sm:text-sm font-black text-white shadow-[4px_4px_0_0_#2D8CF0] disabled:opacity-40 hover:bg-[#2D8CF0] transition-colors cursor-pointer"
+                    >
+                      FINAL DETAILS →
+                    </button>
+                  </div>
+                </div>
+              )}
+
+              {/* Step 4 */}
+              {step === 4 && (
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  <div className="flex items-center justify-between border-b-2 border-ink pb-3 mb-6">
+                    <span className="font-display text-xs font-black tracking-widest text-[#2D8CF0] uppercase">
+                      STEP 4 OF 4
+                    </span>
+                    <span className="font-display text-xs font-bold text-[#4A5970]">CONTACT</span>
+                  </div>
+                  <h2 className="font-display text-2xl sm:text-3xl font-black text-ink">
+                    Where should we send your proposal?
+                  </h2>
+                  <div>
+                    <label className="block font-display text-xs font-bold uppercase text-ink">
+                      Full Name *
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      placeholder="e.g. Ramesh Sharma"
+                      className="mt-1 w-full rounded-2xl border-2 border-ink bg-[#F0F4F8] px-4 py-3 text-base text-ink placeholder:text-[#4A5970] focus:outline-none focus:ring-2 focus:ring-[#2D8CF0]"
+                    />
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block font-display text-xs font-bold uppercase text-ink">
+                        WhatsApp Number *
+                      </label>
+                      <input
+                        type="tel"
+                        required
+                        value={phone}
+                        onChange={(e) => setPhone(e.target.value)}
+                        placeholder="+91 98765 43210"
+                        className="mt-1 w-full rounded-2xl border-2 border-ink bg-[#F0F4F8] px-4 py-3 text-base text-ink placeholder:text-[#4A5970] focus:outline-none focus:ring-2 focus:ring-[#2D8CF0]"
+                      />
+                    </div>
+                    <div>
+                      <label className="block font-display text-xs font-bold uppercase text-ink">
+                        Email Address
+                      </label>
+                      <input
+                        type="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        placeholder="you@company.com"
+                        className="mt-1 w-full rounded-2xl border-2 border-ink bg-[#F0F4F8] px-4 py-3 text-base text-ink placeholder:text-[#4A5970] focus:outline-none focus:ring-2 focus:ring-[#2D8CF0]"
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <label className="block font-display text-xs font-bold uppercase text-ink">
+                      Project Notes (Optional)
+                    </label>
+                    <textarea
+                      rows={3}
+                      value={notes}
+                      onChange={(e) => setNotes(e.target.value)}
+                      placeholder="Tell us what you want to achieve or any reference websites/apps..."
+                      className="mt-1 w-full rounded-2xl border-2 border-ink bg-[#F0F4F8] px-4 py-3 text-base text-ink placeholder:text-[#4A5970] focus:outline-none focus:ring-2 focus:ring-[#2D8CF0]"
+                    />
+                  </div>
+
+                  {errorMsg && (
+                    <p className="text-xs font-bold text-red-600 bg-red-100 p-3 rounded-xl border border-red-300">
+                      {errorMsg}
+                    </p>
+                  )}
+
+                  <div className="pt-4 flex flex-col sm:flex-row gap-3">
+                    <button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="flex-1 rounded-full border-2 border-ink bg-[#0B172A] py-3.5 font-display text-sm font-black text-white shadow-[5px_5px_0_0_#2D8CF0] hover:bg-[#2D8CF0] transition-colors cursor-pointer disabled:opacity-50"
+                    >
+                      {isSubmitting ? "TRANSMITTING..." : "SUBMIT INQUIRY ✦"}
+                    </button>
+                    <button
+                      type="button"
+                      onClick={handleEmailRedirect}
+                      className="flex-1 rounded-full border-2 border-ink bg-[#A1D5F5] py-3.5 font-display text-sm font-black text-ink shadow-[5px_5px_0_0_#0B172A] hover:bg-white transition-colors cursor-pointer"
+                    >
+                      SEND VIA EMAIL ✉
+                    </button>
+                  </div>
+                </form>
+              )}
+            </div>
+          )}
+        </div>
+      </section>
+
+      <Footer />
+    </main>
   );
 }

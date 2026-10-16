@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect } from "react";
+import React, { useEffect } from "react";
+import Link from "next/link";
 
-export default function Error({
+export default function ErrorPage({
   error,
   reset,
 }: {
@@ -10,19 +11,34 @@ export default function Error({
   reset: () => void;
 }) {
   useEffect(() => {
-    console.error("Next.js Error Boundary caught error:", error);
+    console.error(error);
   }, [error]);
 
   return (
-    <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center p-6 text-center">
-      <h2 className="text-2xl font-bold mb-2">Something went wrong!</h2>
-      <p className="text-xs text-zinc-400 mb-4">{error?.message || "An unexpected error occurred."}</p>
-      <button
-        onClick={() => reset()}
-        className="px-4 py-2 bg-blue-600 hover:bg-blue-500 rounded-full text-xs font-semibold text-white transition"
-      >
-        Try again
-      </button>
-    </div>
+    <main className="dot-grid flex min-h-screen flex-col items-center justify-center px-6 text-center bg-cream text-ink">
+      <p className="font-display text-sm font-bold tracking-[0.2em] text-orange">
+        SOMETHING BROKE
+      </p>
+      <h1 className="mt-3 font-display text-[clamp(2.5rem,10vw,6rem)] font-black uppercase leading-none tracking-tight text-ink">
+        ERROR
+      </h1>
+      <p className="mt-4 max-w-sm text-base font-semibold text-ink/70">
+        Our automated monitors are on it. Try refreshing or head back to safety.
+      </p>
+      <div className="mt-8 flex gap-4">
+        <button
+          onClick={() => reset()}
+          className="rounded-full bg-orange px-6 py-3 font-display text-sm font-bold text-cream shadow-[4px_4px_0_0_#141414] hover:bg-yellow hover:text-ink transition-colors"
+        >
+          TRY AGAIN
+        </button>
+        <Link
+          href="/"
+          className="rounded-full border-2 border-ink bg-paper px-6 py-3 font-display text-sm font-bold text-ink shadow-[4px_4px_0_0_#141414] hover:bg-cream transition-colors"
+        >
+          BACK HOME
+        </Link>
+      </div>
+    </main>
   );
 }

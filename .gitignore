@@ -10,12 +10,14 @@ out/
 build/
 dist/
 
-# Environment Variables
+# Environment Variables & Keys
 .env
 .env.local
 .env.production
 .env.development
 *.env
+serviceAccountKey.json
+*serviceAccount*.json
 
 # IDE & System Files
 .DS_Store

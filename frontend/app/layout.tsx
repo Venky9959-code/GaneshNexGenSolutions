@@ -1,35 +1,49 @@
 import type { Metadata } from "next";
+import { Archivo, Space_Grotesk } from "next/font/google";
 import "./globals.css";
-import AppShell from "@/components/AppShell";
-import { IS_UNDER_PROCESS } from "@/lib/maintenance";
+
+const archivo = Archivo({
+  subsets: ["latin"],
+  weight: ["700", "800", "900"],
+  variable: "--font-archivo",
+  display: "swap",
+});
+
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-grotesk",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
-  title: IS_UNDER_PROCESS 
-    ? "Website Under Process | Ganesh NexGen Solutions" 
-    : "Ganesh NexGen Solutions | Your Growth. Our Technology.",
-  description: IS_UNDER_PROCESS
-    ? "Our website is currently undergoing a scheduled system upgrade to bring you a faster, smarter, and next-generation digital experience. We will be back online shortly."
-    : "Enterprise web development, custom software development, AI automation, cloud solutions, and technology consulting for growing businesses across India.",
-  keywords: "website development company India, business website development, custom software development India, startup website development, ecommerce development company, AI automation services",
-  icons: {
-    icon: [
-      { url: "/brand/logo-icon.png", type: "image/png" },
-      { url: "/favicon.ico", sizes: "any" }
-    ],
-    shortcut: "/brand/logo-icon.png",
-    apple: "/brand/logo-icon.png",
-  },
+  title: "Ganesh NexGen Co — Software, Websites & AI Automation",
+  description:
+    "Ganesh NexGen Co is a modern software and automation studio. We engineer custom enterprise software, build high-speed websites, and wire up AI bots so your business looks big and moves fast.",
+  keywords: [
+    "custom software development",
+    "web development India",
+    "AI automation",
+    "WhatsApp bot development",
+    "Shopify store",
+    "ERP software",
+    "Ganesh NexGen",
+  ],
+  authors: [{ name: "Ganesh NexGen Solutions" }],
   openGraph: {
-    title: IS_UNDER_PROCESS 
-      ? "Website Under Process | Ganesh NexGen Solutions" 
-      : "Ganesh NexGen Solutions | Your Growth. Our Technology.",
-    description: "Enterprise technology and digital transformation company serving startups, SMEs, healthcare, retail, and growing businesses across India.",
-    url: "https://ganeshnexgen.com",
-    siteName: "Ganesh NexGen Solutions",
-    locale: "en_IN",
+    title: "Ganesh NexGen Co — Software, Websites & AI Automation",
+    description: "Bold software. Smart websites. AI that works. Made for real businesses.",
     type: "website",
+    locale: "en_IN",
+  },
+  icons: {
+    icon: "/brand/logo.png",
+    shortcut: "/brand/logo.png",
+    apple: "/brand/logo.png",
   },
 };
+
+import TapEffect from "@/components/TapEffect";
 
 export default function RootLayout({
   children,
@@ -37,35 +51,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function() {
-                try {
-                  var savedTheme = localStorage.getItem('theme');
-                  var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-                  if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
-                    document.documentElement.classList.add('dark');
-                    document.documentElement.classList.remove('light');
-                    document.documentElement.style.colorScheme = 'dark';
-                  } else {
-                    document.documentElement.classList.add('light');
-                    document.documentElement.classList.remove('dark');
-                    document.documentElement.style.colorScheme = 'light';
-                  }
-                } catch (e) {}
-              })();
-            `
-          }}
-        />
-      </head>
-      <body className="bg-[var(--bg-primary)] text-[var(--text-main)] antialiased selection:bg-blue-500 selection:text-white flex flex-col min-h-screen transition-colors duration-300">
-        <AppShell>
-          {children}
-        </AppShell>
+    <html lang="en" className={`${archivo.variable} ${spaceGrotesk.variable}`}>
+      <body className="antialiased">
+        <TapEffect />
+        {children}
       </body>
     </html>
   );
 }
+

@@ -1,19 +1,24 @@
-"use client";
-
+import React from "react";
 import Link from "next/link";
-import { ArrowLeft, AlertCircle } from "lucide-react";
 
 export default function NotFound() {
   return (
-    <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center p-6 text-center">
-      <div className="w-12 h-12 rounded-2xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 mb-4">
-        <AlertCircle className="w-6 h-6" />
-      </div>
-      <h1 className="text-3xl font-bold mb-2">404 — Page Not Found</h1>
-      <p className="text-xs text-zinc-400 mb-6">The requested module or resource was not found on Ganesh BOS platform.</p>
-      <Link href="/dashboard" className="px-5 py-2.5 rounded-full bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold flex items-center gap-2 transition">
-        <ArrowLeft className="w-4 h-4" /> Return to Dashboard
+    <main className="dot-grid flex min-h-screen flex-col items-center justify-center px-6 text-center bg-cream text-ink">
+      <p className="font-display text-sm font-bold tracking-[0.2em] text-orange">
+        ERROR 404
+      </p>
+      <h1 className="mt-3 font-display text-[clamp(3.5rem,14vw,9rem)] font-black uppercase leading-none tracking-tight text-ink">
+        LOST
+      </h1>
+      <p className="mt-4 max-w-sm text-base font-semibold text-ink/70">
+        This page does not exist. Even our software has its limits.
+      </p>
+      <Link
+        href="/"
+        className="mt-8 rounded-full bg-ink px-8 py-3.5 font-display text-sm font-bold text-cream shadow-[5px_5px_0_0_#ff4d00] transition-transform hover:-translate-y-1 active:translate-y-0"
+      >
+        TAKE ME HOME →
       </Link>
-    </div>
+    </main>
   );
 }
