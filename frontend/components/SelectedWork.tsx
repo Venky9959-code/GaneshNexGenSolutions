@@ -23,84 +23,6 @@ export interface ProjectItem {
 
 export const PROJECTS: ProjectItem[] = [
   {
-    id: "peakoo-agency",
-    name: "PEAKOO AGENCY",
-    tag: "BRANDING & AGENCY",
-    description: "Building Brands that Grow. High-converting creative agency portfolio with bold typography & fluid motion.",
-    initials: "PA",
-    coverBg: "bg-ink text-yellow",
-    initialsColor: "text-yellow",
-    metrics: "Live Website ↗",
-    url: "https://peakoo.agency/",
-    displayUrl: "peakoo.agency",
-    image: "/projects/peakoo.png",
-    video: "/work_videos/peakooagency.mp4",
-  },
-  {
-    id: "magical-noodles",
-    name: "MAGICAL NOODLES",
-    tag: "FOOD & HOSPITALITY",
-    description: "Modern fast-casual dining experience with an appetizing visual menu, fast mobile ordering, and snappy checkout.",
-    initials: "MN",
-    coverBg: "bg-paper text-ink",
-    initialsColor: "text-ink",
-    metrics: "Live Web App ↗",
-    url: "https://magicalnoodles.vercel.app/",
-    displayUrl: "magicalnoodles.vercel.app",
-    image: "/projects/magicalnoodles.png",
-    video: "/work_videos/magicalnoodles.mp4",
-  },
-  {
-    id: "bezawada-car-rentals",
-    name: "BEZAWADA CAR RENTALS",
-    tag: "CAR RENTAL & TRAVEL",
-    description: "Best Self Drive & Car with Driver in Vijayawada. Direct 1-tap WhatsApp booking bot and instant fleet reservations.",
-    initials: "BC",
-    coverBg: "bg-ink text-yellow",
-    initialsColor: "text-yellow",
-    metrics: "Live Booking Portal ↗",
-    url: "https://www.bezawadacarrental.com/",
-    displayUrl: "bezawadacarrental.com",
-    image: "/projects/bezawada.png",
-    video: "/work_videos/bezawadacarrental.mp4",
-  },
-  {
-    id: "dial-a-septic",
-    name: "DIAL-A-SEPTIC TANK CLEANERS",
-    tag: "24/7 SERVICES & SEO",
-    description: "Best Septic Tank Cleaning in Hyderabad. 24/7 emergency hotline, instant quote dispatch, and #1 local search ranking.",
-    initials: "DS",
-    coverBg: "bg-orange text-cream",
-    initialsColor: "text-cream",
-    metrics: "Live 24/7 Service ↗",
-    url: "https://www.dialaseptictankcleaners.com/home",
-    displayUrl: "dialaseptictankcleaners.com/home",
-    image: "/projects/dialaseptic.png",
-    video: "/work_videos/dialaseptictankcleaners.mp4",
-  },
-  {
-    id: "hew-groups",
-    name: "HEW GROUPS",
-    tag: "ENTERPRISE INFRA",
-    description: "Website is Cooking — Will be ready and updated soon! Enterprise-grade digital presence and client management.",
-    initials: "HG",
-    coverBg: "bg-ink text-cream",
-    initialsColor: "text-cream",
-    metrics: "Cooking in Oven 🍳",
-    isCooking: true,
-  },
-  {
-    id: "skillsboosthub",
-    name: "SKILLSBOOSTHUB",
-    tag: "EDTECH PLATFORM",
-    description: "Website is Cooking — Will be Ready Soon! High-impact student upskilling hub with live project mentorship.",
-    initials: "SB",
-    coverBg: "bg-orange text-cream",
-    initialsColor: "text-cream",
-    metrics: "Cooking in Oven 🍳",
-    isCooking: true,
-  },
-  {
     id: "add-your-project",
     name: "ADD YOUR PROJECT NEXT",
     tag: "YOUR BRAND HERE",
@@ -151,8 +73,8 @@ export default function SelectedWork({ onOpenProjectModal }: SelectedWorkProps) 
           </p>
         </div>
 
-        {/* Project Showcase Grid (Exact aijugaad.co 2-col responsive layout) */}
-        <div className="mx-auto mt-12 grid max-w-5xl grid-cols-2 gap-3 sm:gap-6">
+        {/* Project Showcase Grid */}
+        <div className={`mx-auto mt-12 ${PROJECTS.length > 1 ? "grid max-w-5xl grid-cols-2 gap-3 sm:gap-6" : "max-w-xl"}`}>
           {PROJECTS.map((proj) => {
             const cardContent = (
               <>

@@ -26,16 +26,16 @@ interface CaseStudy {
 
 const CASE_STUDIES: CaseStudy[] = [
   {
-    slug: "peakoo-agency-inbound-growth",
-    client: "PEAKOO AGENCY",
+    slug: "creative-studio-inbound-growth",
+    client: "GLOBAL CREATIVE STUDIO",
     badge: "2.4X INBOUND INQUIRIES",
     title: "High-converting creative agency portfolio with fluid motion",
     summary:
-      "Crafted a high-energy, typography-driven web experience using Next.js, tailored micro-animations, and frictionless lead capture that positions Peakoo as an elite creative powerhouse.",
+      "Crafted a high-energy, typography-driven web experience using Next.js, tailored micro-animations, and frictionless lead capture that positions the studio as an elite creative powerhouse.",
     image: "/projects/peakoo.png",
     industry: "Brand Strategy & Digital Agency",
     challenge:
-      "Peakoo Agency needed an arresting, global-tier portfolio website that matched their caliber, loaded in sub-seconds, and converted high-ticket enterprise brand inquiries without agency fluff.",
+      "The creative studio needed an arresting portfolio platform that matched their caliber, loaded in sub-seconds, and converted high-ticket enterprise brand inquiries without agency fluff.",
     solution:
       "Engineered an ultra-crisp Next.js experience with bold neo-brutalist typography, instant interactive previews, and streamlined inquiry booking flows.",
     result:
@@ -45,58 +45,52 @@ const CASE_STUDIES: CaseStudy[] = [
       { label: "Page Load Speed", value: "0.45s" },
       { label: "Retainers Closed", value: "+85%" },
     ],
-    url: "https://peakoo.agency/",
-    displayUrl: "peakoo.agency",
   },
   {
-    slug: "bezawada-car-rentals-instant-booking",
-    client: "BEZAWADA CAR RENTALS",
+    slug: "mobility-fleet-instant-booking",
+    client: "MOBILITY FLEET OPERATOR",
     badge: "70%+ WHATSAPP BOOKINGS",
     title: "Instant 1-tap WhatsApp booking portal for 24/7 fleet reservations",
     summary:
       "Engineered an instant WhatsApp-integrated booking portal featuring real-time fleet availability, one-tap rate calculator, and automated driver dispatch notifications.",
     image: "/projects/bezawada.png",
-    industry: "Car Rental & Self-Drive Fleet (Vijayawada)",
+    industry: "Car Rental & Vehicle Fleet Services",
     challenge:
-      "Manual phone calls for booking self-drive and driver cars caused lost midnight leads and dispatch confusion during peak festival and weekend rushes in Vijayawada.",
+      "Manual phone calls for booking self-drive and chauffeur vehicles caused lost midnight leads and dispatch confusion during peak weekend rushes.",
     solution:
       "Architected a mobile-first booking interface connected directly to WhatsApp with real-time vehicle selection, pricing cards, and one-tap direct booking.",
     result:
-      "Customers can reserve self-drive cars in under 30 seconds. Over 70% of bookings now execute automatically via WhatsApp without tying up office phone lines.",
+      "Customers can reserve vehicles in under 30 seconds. Over 70% of bookings now execute automatically via WhatsApp without tying up office phone lines.",
     stats: [
       { label: "Booking Completion", value: "< 30 sec" },
       { label: "Direct WhatsApp Bookings", value: "70%+" },
       { label: "Operating Availability", value: "24/7/365" },
     ],
-    url: "https://www.bezawadacarrental.com/",
-    displayUrl: "bezawadacarrental.com",
   },
   {
-    slug: "dial-a-septic-247-emergency-dispatch",
-    client: "DIAL-A-SEPTIC TANK CLEANERS",
+    slug: "emergency-services-dispatch",
+    client: "24/7 EMERGENCY SERVICES",
     badge: "#1 LOCAL GOOGLE RANK",
-    title: "Hyper-fast emergency dispatch portal dominating local Hyderabad search",
+    title: "Hyper-fast emergency dispatch portal dominating local search",
     summary:
-      "Engineered a hyper-fast, mobile-first emergency portal with instant call buttons, WhatsApp location sharing, and hyper-targeted Hyderabad geo-SEO schema.",
+      "Engineered a hyper-fast, mobile-first emergency portal with instant call buttons, WhatsApp location sharing, and hyper-targeted local geo-SEO schema.",
     image: "/projects/dialaseptic.png",
-    industry: "24/7 Emergency Sanitation Services (Hyderabad)",
+    industry: "24/7 On-Demand Emergency Sanitation",
     challenge:
-      "Emergency septic cleaning customers require immediate 1-tap mobile phone dispatch, but old static pages suffered poor Google Maps placement and high drop-off.",
+      "Emergency service customers require immediate 1-tap mobile phone dispatch, but old static pages suffered poor search placement and high drop-off.",
     solution:
       "Engineered a hyper-fast, mobile-optimized emergency portal with prominent sticky call buttons, instant WhatsApp GPS location dispatch, and geo-targeted schema markup.",
     result:
-      "Secured #1 ranking across central Hyderabad search clusters, generating over 250+ inbound emergency calls per week and keeping sanitation vehicle fleets fully scheduled 24/7.",
+      "Secured #1 ranking across local search clusters, generating over 250+ inbound emergency calls per week and keeping service vehicle fleets fully scheduled 24/7.",
     stats: [
       { label: "Emergency Calls / Week", value: "250+" },
-      { label: "Local Google Rank", value: "#1 in Hyd" },
+      { label: "Local Google Rank", value: "#1 Local" },
       { label: "Mobile Call Conversion", value: "48%" },
     ],
-    url: "https://www.dialaseptictankcleaners.com/home",
-    displayUrl: "dialaseptictankcleaners.com/home",
   },
   {
-    slug: "magical-noodles-mobile-ordering",
-    client: "MAGICAL NOODLES",
+    slug: "dining-mobile-ordering",
+    client: "FAST-CASUAL DINING CHAIN",
     badge: "+45% DIRECT MOBILE ORDERS",
     title: "Interactive digital dining menu saving 28% in aggregator commissions",
     summary:
@@ -114,8 +108,6 @@ const CASE_STUDIES: CaseStudy[] = [
       { label: "Commission Saved", value: "28%" },
       { label: "Checkout Friction", value: "0.0%" },
     ],
-    url: "https://magicalnoodles.vercel.app/",
-    displayUrl: "magicalnoodles.vercel.app",
   },
 ];
 

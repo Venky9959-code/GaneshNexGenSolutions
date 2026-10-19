@@ -8,8 +8,6 @@ interface ReviewItem {
   name: string;
   project: string;
   tag: string;
-  site: string;
-  url?: string;
   initials: string;
   cover: string;
   quote: string;
@@ -18,78 +16,66 @@ interface ReviewItem {
 
 const REVIEWS: ReviewItem[] = [
   {
-    id: "rev-peakoo",
-    name: "PEAKOO AGENCY",
-    project: "BRANDING & AGENCY",
+    id: "rev-agency",
+    name: "CREATIVE STUDIO",
+    project: "BRANDING & DESIGN",
     tag: "WHATSAPP",
-    site: "peakoo.agency",
-    url: "https://peakoo.agency/",
-    initials: "PA",
+    initials: "CS",
     cover: "bg-ink text-yellow",
     quote:
-      "Bro the new branding and portfolio website is pure magic! Our inbound agency inquiries doubled within the first 10 days of launch. The motion and typography make us look like a global tier-1 studio.",
+      "The new branding and digital experience is pure magic! Our inbound inquiries doubled within the first 10 days of launch. The motion and typography make us look like a global tier-1 studio.",
     date: "Yesterday at 7:14 PM",
   },
   {
-    id: "rev-magical-noodles",
-    name: "MAGICAL NOODLES",
+    id: "rev-hospitality",
+    name: "F&B RESTAURANT CHAIN",
     project: "FOOD & HOSPITALITY",
     tag: "WHATSAPP",
-    site: "magicalnoodles.vercel.app",
-    url: "https://magicalnoodles.vercel.app/",
-    initials: "MN",
+    initials: "FB",
     cover: "bg-orange text-cream",
     quote:
-      "Everyone is loving the new food menu interface! Weekend mobile orders jumped by 45% and the site loads instantly even on weak 4G. Super happy with Venky and Ganesh's work!",
+      "Everyone is loving the new food menu interface! Weekend mobile orders jumped by 45% and the app loads instantly even on weak 4G. Super happy with the engineering team's work!",
     date: "14 Oct, 9:20 PM",
   },
   {
-    id: "rev-bezawada",
-    name: "BEZAWADA CAR RENTALS",
-    project: "CAR RENTAL & TRAVEL",
+    id: "rev-mobility",
+    name: "MOBILITY FLEET",
+    project: "MOBILITY & TRAVEL",
     tag: "WHATSAPP",
-    site: "bezawadacarrental.com",
-    url: "https://www.bezawadacarrental.com/",
-    initials: "BC",
+    initials: "MF",
     cover: "bg-ink text-yellow",
     quote:
-      "The direct WhatsApp self-drive booking system is a game changer for Vijayawada. Customers browse our cars and lock their rental in 30 seconds. No manual calls needed at midnight anymore.",
+      "The direct WhatsApp self-drive booking system is a game changer. Customers browse vehicles and lock their rental in 30 seconds. No manual calls needed at midnight anymore.",
     date: "11 Oct, 4:45 PM",
   },
   {
-    id: "rev-dial-a-septic",
-    name: "DIAL-A-SEPTIC TANK CLEANERS",
-    project: "24/7 SERVICES & SEO",
+    id: "rev-services",
+    name: "24/7 ON-DEMAND SERVICES",
+    project: "SERVICES & AUTOMATION",
     tag: "WHATSAPP",
-    site: "dialaseptictankcleaners.com",
-    url: "https://www.dialaseptictankcleaners.com/home",
-    initials: "DS",
+    initials: "OS",
     cover: "bg-orange text-cream",
     quote:
-      "Continuous 24/7 emergency cleaning calls pouring in across Hyderabad! The tap-to-call button and local Google SEO ranking have kept our trucks booked back to back. Best investment!",
+      "Continuous 24/7 emergency service calls pouring in! The tap-to-call button and instant booking have kept our operations booked back to back. Best investment!",
     date: "06 Oct, 11:30 AM",
   },
   {
-    id: "rev-hew",
-    name: "HEW GROUPS",
-    project: "ENTERPRISE INFRA",
+    id: "rev-enterprise",
+    name: "ENTERPRISE INFRA",
+    project: "ENTERPRISE SYSTEMS",
     tag: "WHATSAPP",
-    site: "hewgroups.com",
-    url: "https://hewgroups.com",
-    initials: "HG",
+    initials: "EI",
     cover: "bg-ink text-yellow",
     quote:
-      "The preview build looks rock-solid and enterprise ready. Clean blue aesthetic, ultra snappy loading, and zero bloat. Excited for the official launch next week!",
+      "The preview build looks rock-solid and enterprise ready. Clean aesthetic, ultra snappy loading, and zero bloat. Excited for the official launch next week!",
     date: "03 Oct, 3:15 PM",
   },
   {
-    id: "rev-skillsboost",
-    name: "SKILLSBOOSTHUB",
+    id: "rev-edtech",
+    name: "EDTECH PLATFORM",
     project: "EDTECH PLATFORM",
     tag: "WHATSAPP",
-    site: "skillsboosthub.com",
-    url: "https://skillsboosthub.com",
-    initials: "SB",
+    initials: "ET",
     cover: "bg-orange text-cream",
     quote:
       "The interactive student portal UI prototype is super crisp. Love the speed and frictionless course discovery. Ready to shake up edtech learning soon!",
@@ -330,24 +316,11 @@ export default function ReviewsDM({ onOpenProjectModal }: ReviewsDMProps) {
                     </div>
                   </div>
 
-                  {/* Footer Info & URL */}
+                  {/* Footer Info */}
                   <div className="mt-auto flex items-center justify-between gap-2 pt-3">
-                    {rev.url ? (
-                      <a
-                        href={rev.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        draggable={false}
-                        onClick={(e) => e.stopPropagation()}
-                        className="truncate font-display text-xs font-black tracking-tight underline decoration-orange decoration-2 underline-offset-4 transition-colors hover:text-orange"
-                      >
-                        {rev.site}
-                      </a>
-                    ) : (
-                      <p className="truncate font-display text-xs font-black tracking-tight">
-                        {rev.site}
-                      </p>
-                    )}
+                    <p className="truncate font-display text-xs font-black tracking-tight text-ink">
+                      {rev.name}
+                    </p>
                     <span className="shrink-0 font-display text-[0.55rem] font-bold tracking-[0.12em] text-orange">
                       {rev.project}
                     </span>
@@ -469,20 +442,9 @@ export default function ReviewsDM({ onOpenProjectModal }: ReviewsDMProps) {
 
                   {/* Modal Footer */}
                   <div className="mt-4 flex items-center justify-between gap-2 border-t-2 border-ink/10 pt-3">
-                    {activeReview.url ? (
-                      <a
-                        href={activeReview.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="truncate font-display text-xs font-black tracking-tight underline decoration-orange decoration-2 underline-offset-4 transition-colors hover:text-orange"
-                      >
-                        {activeReview.site}
-                      </a>
-                    ) : (
-                      <p className="truncate font-display text-xs font-black tracking-tight">
-                        {activeReview.site}
-                      </p>
-                    )}
+                    <p className="truncate font-display text-xs font-black tracking-tight text-ink">
+                      {activeReview.name}
+                    </p>
                     <span className="shrink-0 font-display text-[0.55rem] font-bold tracking-[0.12em] text-orange">
                       {activeReview.project}
                     </span>

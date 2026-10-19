@@ -280,7 +280,7 @@ export default function WorkPage() {
               Proof, not promises.
             </h1>
             <p className="mt-3 text-sm font-medium text-cream/60 sm:text-base">
-              Every card is a real business we built — tap any website and judge us live.
+              Every project is engineered for speed, conversion and scale — move fast and reserve your slot.
             </p>
           </motion.div>
         </div>
@@ -291,26 +291,28 @@ export default function WorkPage() {
         <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-20">
           <div className="mx-auto max-w-6xl">
             {/* Filter Buttons matching aijugaad.co style */}
-            <div className="mb-5 flex flex-wrap gap-1.5 sm:mb-8 sm:gap-2">
-              {CATEGORIES.map((cat) => {
-                const isActive = filter === cat;
-                return (
-                  <button
-                    key={cat}
-                    onClick={() => setFilter(cat)}
-                    className={`rounded-full border-2 px-3 py-1.5 font-display text-[0.6rem] font-black tracking-[0.08em] transition-colors sm:px-4 sm:text-xs sm:tracking-[0.1em] cursor-pointer ${isActive
-                        ? "border-cream bg-cream text-ink"
-                        : "border-cream/40 bg-transparent text-cream hover:border-cream/70 hover:bg-cream/10"
-                      }`}
-                  >
-                    {cat}
-                  </button>
-                );
-              })}
-            </div>
+            {workProjects.length > 0 && (
+              <div className="mb-5 flex flex-wrap gap-1.5 sm:mb-8 sm:gap-2">
+                {CATEGORIES.map((cat) => {
+                  const isActive = filter === cat;
+                  return (
+                    <button
+                      key={cat}
+                      onClick={() => setFilter(cat)}
+                      className={`rounded-full border-2 px-3 py-1.5 font-display text-[0.6rem] font-black tracking-[0.08em] transition-colors sm:px-4 sm:text-xs sm:tracking-[0.1em] cursor-pointer ${isActive
+                          ? "border-cream bg-cream text-ink"
+                          : "border-cream/40 bg-transparent text-cream hover:border-cream/70 hover:bg-cream/10"
+                        }`}
+                    >
+                      {cat}
+                    </button>
+                  );
+                })}
+              </div>
+            )}
 
             {/* Grid of Work Cards */}
-            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            <div className={workProjects.length > 0 ? "grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3" : "mx-auto max-w-lg"}>
               <AnimatePresence mode="popLayout">
                 {filtered.map((proj, idx) => (
                   <WorkCardItem
