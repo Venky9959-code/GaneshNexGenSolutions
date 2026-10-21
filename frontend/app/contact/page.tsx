@@ -52,6 +52,16 @@ export default function ContactPage() {
     setSubmitted(true);
   };
 
+  const getSessionId = () => {
+    if (typeof window === "undefined") return "";
+    let sid = sessionStorage.getItem("gns_session_id");
+    if (!sid) {
+      sid = "sess_" + Math.random().toString(36).substring(2, 11) + "_" + Date.now();
+      sessionStorage.setItem("gns_session_id", sid);
+    }
+    return sid;
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -69,6 +79,7 @@ export default function ContactPage() {
           phone,
           email,
           notes,
+          sessionId: getSessionId(),
         }),
       });
 
@@ -76,7 +87,14 @@ export default function ContactPage() {
       if (data.success) {
         setLeadId(data.leadNumber);
         setSubmitted(true);
+        if (typeof window !== "undefined") {
+          sessionStorage.setItem("gns_submitted_lead", data.leadNumber);
+        }
       } else {
+        if (data.rateLimited && data.leadNumber) {
+          setLeadId(data.leadNumber);
+          setSubmitted(true);
+        }
         setErrorMsg(data.error || "Submission error. Please try again.");
       }
     } catch (err) {
