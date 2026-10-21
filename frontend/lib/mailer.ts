@@ -16,7 +16,7 @@ export async function sendInquiryEmails(data: InquiryData) {
   const adminEmail =
     process.env.NOTIFICATION_EMAIL ||
     process.env.ADMIN_EMAIL ||
-    "contact@ganeshnexgen.com";
+    "venky995982@gmail.com";
 
   console.log(
     `[Inquiry Engine] Processing inquiry notification for lead ${data.leadNumber}`
@@ -26,10 +26,17 @@ export async function sendInquiryEmails(data: InquiryData) {
   let emailJsDispatched = false;
 
   // 1. Primary: Nodemailer SMTP (Direct Gmail SMTP — ensures real variable interpolation & zero template bugs)
-  const smtpUser = (process.env.SMTP_USER || process.env.EMAIL_USER || "").trim();
-  const rawPass = process.env.SMTP_PASS || process.env.EMAIL_PASS || "";
+  const smtpUser = (
+    process.env.SMTP_USER ||
+    process.env.EMAIL_USER ||
+    "venky995982@gmail.com"
+  ).trim();
+  const rawPass =
+    process.env.SMTP_PASS ||
+    process.env.EMAIL_PASS ||
+    "dtps ypmq aoov ylgf";
   const smtpPass = rawPass.replace(/\s+/g, "");
-  const smtpHost = process.env.SMTP_HOST;
+  const smtpHost = process.env.SMTP_HOST || "smtp.gmail.com";
   const smtpPort = process.env.SMTP_PORT
     ? parseInt(process.env.SMTP_PORT, 10)
     : 465;
@@ -200,13 +207,13 @@ export async function sendInquiryEmails(data: InquiryData) {
                     </p>
                   </div>
 
-                  <!-- Quick Action Buttons -->
-                  <div style="text-align: center; padding-top: 8px;">
-                    <a href="https://wa.me/919959828859?text=Hi%20Ganesh%20NexGen%20Team,%20my%20inquiry%20reference%20is%20${data.leadNumber}" style="display: inline-block; background-color: #25D366; color: #FFFFFF; font-weight: bold; text-decoration: none; padding: 12px 24px; border-radius: 8px; font-size: 13px; margin: 4px;">
-                      💬 Chat on WhatsApp
-                    </a>
-                    <a href="mailto:${adminEmail}?subject=Regarding%20Inquiry%20${data.leadNumber}" style="display: inline-block; background-color: #0F172A; color: #FFFFFF; font-weight: bold; text-decoration: none; padding: 12px 24px; border-radius: 8px; font-size: 13px; margin: 4px;">
-                      ✉️ Reply to Team
+                  <!-- Footer Call-to-action Matching Screenshot -->
+                  <div style="border-top: 1px solid #E2E8F0; padding-top: 20px; text-align: center; margin-top: 24px;">
+                    <p style="margin: 0 0 14px 0; font-size: 13px; color: #64748B;">
+                      Need immediate assistance or want to share documents?
+                    </p>
+                    <a href="https://wa.me/919959828859?text=Hi%20Ganesh%20NexGen%20Team,%20my%20inquiry%20reference%20is%20${data.leadNumber}" style="display: inline-block; background-color: #25D366; color: #FFFFFF; font-weight: 700; text-decoration: none; padding: 12px 28px; border-radius: 8px; font-size: 14px; box-shadow: 0 2px 6px rgba(37, 211, 102, 0.25);">
+                      💬 Chat Directly on WhatsApp
                     </a>
                   </div>
 
