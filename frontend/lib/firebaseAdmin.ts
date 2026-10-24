@@ -4,27 +4,23 @@ import fs from "fs";
 import path from "path";
 
 function getServiceAccount() {
-  // 1. Check serviceAccountKey.json in frontend directory or cwd
-  try {
-    const candidates = [
-      path.resolve(process.cwd(), "serviceAccountKey.json"),
-      path.resolve(process.cwd(), "frontend", "serviceAccountKey.json"),
-      path.resolve(process.cwd(), "../serviceAccountKey.json"),
-    ];
-    for (const c of candidates) {
-      if (fs.existsSync(c)) {
-        return JSON.parse(fs.readFileSync(c, "utf-8"));
-      }
-    }
-  } catch (e) {
-    console.warn("[ServiceAccount Load Warning]", e);
-  }
-
-  // 2. Direct string in env
+  // 1. Check direct JSON string in environment variable (Production best practice)
   if (process.env.FIREBASE_SERVICE_ACCOUNT_KEY) {
     try {
       return JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_KEY);
-    } catch {}
+    } catch (e) {
+      console.warn("[Firebase Env Parse Warning]", e);
+    }
+  }
+
+  // 2. Check localized file path
+  try {
+    const keyPath = path.join(process.cwd(), "serviceAccountKey.json");
+    if (fs.existsSync(keyPath)) {
+      return JSON.parse(fs.readFileSync(keyPath, "utf-8"));
+    }
+  } catch (e) {
+    console.warn("[ServiceAccount Load Warning]", e);
   }
 
   return null;

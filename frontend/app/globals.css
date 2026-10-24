@@ -26,8 +26,6 @@
     background-color: var(--color-cream);
     color: var(--color-ink);
     font-family: var(--font-grotesk), Inter, -apple-system, sans-serif;
-    -webkit-user-select: none;
-    user-select: none;
     overflow-x: hidden;
   }
 

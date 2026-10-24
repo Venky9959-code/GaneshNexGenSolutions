@@ -1,0 +1,23 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Selected Work & Engineering Portfolio",
+  description:
+    "Explore production projects shipped by Ganesh NexGen Solutions: bespoke ERP platforms, lightning-fast web apps, AI bots, and custom e-commerce stores.",
+  alternates: {
+    canonical: "https://ganeshnexgen.website/work",
+  },
+  openGraph: {
+    title: "Selected Work & Engineering Portfolio | Ganesh NexGen Solutions",
+    description: "Real production software, websites, and AI systems built for ambitious businesses.",
+    url: "https://ganeshnexgen.website/work",
+  },
+};
+
+export default function WorkLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return <>{children}</>;
+}

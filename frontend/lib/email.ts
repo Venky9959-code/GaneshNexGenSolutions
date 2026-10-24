@@ -9,7 +9,7 @@ export interface LeadEmailPayload {
 
 export async function sendLeadEmails(payload: LeadEmailPayload): Promise<boolean> {
   const apiKey = process.env.RESEND_API_KEY;
-  const adminEmail = process.env.ADMIN_EMAIL || "contact@ganeshnexgen.com";
+  const adminEmail = process.env.ADMIN_EMAIL || "contact@ganeshnexgen.website";
 
   console.log(`[Resend Email Engine] Dispatched lead acknowledgment for Lead ${payload.leadNumber} to ${payload.email}`);
   console.log(`[Resend Email Engine] Dispatched admin alert to ${adminEmail}`);
@@ -28,7 +28,7 @@ export async function sendLeadEmails(payload: LeadEmailPayload): Promise<boolean
         Authorization: `Bearer ${apiKey}`,
       },
       body: JSON.stringify({
-        from: "Ganesh NexGen Solutions <noreply@ganeshnexgen.com>",
+        from: "Ganesh NexGen Solutions <contact@ganeshnexgen.website>",
         to: [payload.email],
         subject: `We've Received Your Request | Ganesh NexGen Solutions (${payload.leadNumber})`,
         html: `

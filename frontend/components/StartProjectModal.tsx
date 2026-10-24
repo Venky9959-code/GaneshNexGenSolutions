@@ -53,7 +53,7 @@ export default function StartProjectModal({ isOpen, onClose }: StartProjectModal
     const body = encodeURIComponent(
       `Hi Ganesh NexGen Team,\n\nI want to discuss a project:\n- Service: ${service || "Custom Software"}\n- Budget: ${budget || "To Discuss"}\n- Timeline: ${timeline || "Flexible"}\n- Name: ${name}\n- Contact: ${phone || email}\n- Notes: ${notes || "N/A"}`
     );
-    window.open(`mailto:contact@ganeshnexgen.com?subject=${subject}&body=${body}`, "_blank");
+    window.open(`mailto:contact@ganeshnexgen.website?subject=${subject}&body=${body}`, "_blank");
     setSubmitted(true);
   };
 

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Archivo, Space_Grotesk } from "next/font/google";
 import "./globals.css";
+import TapEffect from "@/components/TapEffect";
 
 const archivo = Archivo({
   subsets: ["latin"],
@@ -17,33 +18,137 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: "Ganesh NexGen Co — Software, Websites & AI Automation",
+  metadataBase: new URL("https://ganeshnexgen.website"),
+  title: {
+    default: "Ganesh NexGen Solutions — Software, High-Speed Websites & AI Automation",
+    template: "%s | Ganesh NexGen Solutions",
+  },
   description:
-    "Ganesh NexGen Co is a modern software and automation studio. We engineer custom enterprise software, build high-speed websites, and wire up AI bots so your business looks big and moves fast.",
+    "Ganesh NexGen Solutions is an elite software engineering and AI automation studio. We engineer custom enterprise software, build high-speed websites, and deploy intelligent AI bots so your business looks big and moves fast.",
   keywords: [
     "custom software development",
     "web development India",
     "AI automation",
     "WhatsApp bot development",
-    "Shopify store",
-    "ERP software",
-    "Ganesh NexGen",
+    "Shopify store development",
+    "ERP software India",
+    "Next.js web developer",
+    "Ganesh NexGen Solutions",
   ],
-  authors: [{ name: "Ganesh NexGen Solutions" }],
-  openGraph: {
-    title: "Ganesh NexGen Co — Software, Websites & AI Automation",
-    description: "Bold software. Smart websites. AI that works. Made for real businesses.",
-    type: "website",
-    locale: "en_IN",
+  authors: [{ name: "Ganesh NexGen Solutions", url: "https://ganeshnexgen.website" }],
+  creator: "Ganesh NexGen Solutions",
+  publisher: "Ganesh NexGen Solutions",
+  formatDetection: {
+    email: true,
+    address: true,
+    telephone: true,
   },
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: "Ganesh NexGen Solutions — Software, Websites & AI Automation",
+    description: "Bold software. Smart websites. AI that works. Engineered for real businesses.",
+    url: "https://ganeshnexgen.website",
+    siteName: "Ganesh NexGen Solutions",
+    locale: "en_IN",
+    type: "website",
+    images: [
+      {
+        url: "/brand/logo.png",
+        width: 1200,
+        height: 630,
+        alt: "Ganesh NexGen Solutions Logo",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Ganesh NexGen Solutions — Software, Websites & AI Automation",
+    description: "Bold software. Smart websites. AI that works. Engineered for real businesses.",
+    images: ["/brand/logo.png"],
+  },
+  manifest: "/site.webmanifest",
   icons: {
-    icon: "/brand/logo.png",
+    icon: [
+      { url: "/brand/logo.png" },
+      { url: "/favicon.ico" },
+    ],
     shortcut: "/brand/logo.png",
-    apple: "/brand/logo.png",
+    apple: "/brand/apple-touch-icon.png",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
   },
 };
 
-import TapEffect from "@/components/TapEffect";
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  name: "Ganesh NexGen Solutions",
+  url: "https://ganeshnexgen.website",
+  logo: "https://ganeshnexgen.website/brand/logo.png",
+  image: "https://ganeshnexgen.website/brand/logo.png",
+  description:
+    "Engineering custom enterprise software, ultra-fast websites, and intelligent AI automation workflows for ambitious businesses.",
+  email: "contact@ganeshnexgen.website",
+  telephone: "+91 9390564946",
+  priceRange: "₹₹",
+  address: {
+    "@type": "PostalAddress",
+    addressCountry: "IN",
+  },
+  openingHoursSpecification: [
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+      ],
+      opens: "09:00",
+      closes: "20:00",
+    },
+  ],
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "Engineering & Development Services",
+    itemListElement: [
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Custom Software & Enterprise ERP Development",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "High-Performance Website Development",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "24/7 AI WhatsApp Automation & Customer Bots",
+        },
+      },
+    ],
+  },
+};
 
 export default function RootLayout({
   children,
@@ -52,6 +157,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${archivo.variable} ${spaceGrotesk.variable}`}>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body className="antialiased">
         <TapEffect />
         {children}
@@ -59,4 +170,3 @@ export default function RootLayout({
     </html>
   );
 }
-

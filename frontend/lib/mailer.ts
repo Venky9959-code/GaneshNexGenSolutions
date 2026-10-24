@@ -16,7 +16,7 @@ export async function sendInquiryEmails(data: InquiryData) {
   const adminEmail =
     process.env.NOTIFICATION_EMAIL ||
     process.env.ADMIN_EMAIL ||
-    "venky995982@gmail.com";
+    "contact@ganeshnexgen.website";
 
   console.log(
     `[Inquiry Engine] Processing inquiry notification for lead ${data.leadNumber}`
@@ -212,7 +212,7 @@ export async function sendInquiryEmails(data: InquiryData) {
                     <p style="margin: 0 0 14px 0; font-size: 13px; color: #64748B;">
                       Need immediate assistance or want to share documents?
                     </p>
-                    <a href="https://wa.me/919959828859?text=Hi%20Ganesh%20NexGen%20Team,%20my%20inquiry%20reference%20is%20${data.leadNumber}" style="display: inline-block; background-color: #25D366; color: #FFFFFF; font-weight: 700; text-decoration: none; padding: 12px 28px; border-radius: 8px; font-size: 14px; box-shadow: 0 2px 6px rgba(37, 211, 102, 0.25);">
+                    <a href="https://wa.me/919390564946?text=Hi%20Ganesh%20NexGen%20Team,%20my%20inquiry%20reference%20is%20${data.leadNumber}" style="display: inline-block; background-color: #25D366; color: #FFFFFF; font-weight: 700; text-decoration: none; padding: 12px 28px; border-radius: 8px; font-size: 14px; box-shadow: 0 2px 6px rgba(37, 211, 102, 0.25);">
                       💬 Chat Directly on WhatsApp
                     </a>
                   </div>
@@ -296,7 +296,7 @@ export async function sendInquiryEmails(data: InquiryData) {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Origin": process.env.NEXT_PUBLIC_SITE_URL || "https://ganeshnexgen.com",
+          "Origin": process.env.NEXT_PUBLIC_SITE_URL || "https://ganeshnexgen.website",
           "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
         },
         body: JSON.stringify(emailJsPayload),
@@ -326,7 +326,7 @@ export async function sendInquiryEmails(data: InquiryData) {
             Authorization: `Bearer ${resendApiKey}`,
           },
           body: JSON.stringify({
-            from: "Ganesh NexGen Co <noreply@ganeshnexgen.com>",
+            from: "Ganesh NexGen Solutions <contact@ganeshnexgen.website>",
             to: [adminEmail],
             subject: `🔥 New Project Inquiry: ${data.service} — ${data.name} (${data.leadNumber})`,
             html: `<p><strong>Client:</strong> ${data.name}</p><p><strong>Phone:</strong> ${data.phone}</p><p><strong>Email:</strong> ${data.email}</p><p><strong>Service:</strong> ${data.service}</p><p><strong>Budget:</strong> ${data.budget}</p><p><strong>Timeline:</strong> ${data.timeline}</p><p><strong>Notes:</strong> ${data.notes || "N/A"}</p>`,

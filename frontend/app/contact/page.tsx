@@ -48,7 +48,7 @@ export default function ContactPage() {
     const body = encodeURIComponent(
       `Hi Ganesh NexGen Team,\n\nI want to discuss a project:\n- Service: ${service || "Custom Software"}\n- Budget: ${budget || "To Discuss"}\n- Timeline: ${timeline || "Flexible"}\n- Name: ${name}\n- Contact: ${phone || email}\n- Notes: ${notes || "N/A"}`
     );
-    window.open(`mailto:contact@ganeshnexgen.com?subject=${subject}&body=${body}`, "_blank");
+    window.open(`mailto:contact@ganeshnexgen.website?subject=${subject}&body=${body}`, "_blank");
     setSubmitted(true);
   };
 
@@ -126,10 +126,10 @@ export default function ContactPage() {
           {/* Quick Direct Email row */}
           <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
             <a
-              href="mailto:contact@ganeshnexgen.com"
+              href="mailto:contact@ganeshnexgen.website"
               className="inline-flex items-center gap-2 rounded-full border-2 border-ink bg-white px-5 py-2 font-display text-xs sm:text-sm font-bold text-ink shadow-[3px_3px_0_0_#0B172A] hover:bg-[#A1D5F5] transition-all"
             >
-              <span>✉</span> Email: contact@ganeshnexgen.com
+              <span>✉</span> Email: contact@ganeshnexgen.website
             </a>
           </div>
         </div>

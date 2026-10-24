@@ -103,7 +103,7 @@ Regarding **{purpose}**, our senior architectural team has prepared the details 
 
 Best Regards,
 **Ganesh NexGen Solutions Team**
-Website: https://ganeshnexgen.com";
+Website: https://ganeshnexgen.website";
     }
 
     public async Task<string> AnswerBusinessQueryAsync(string userPrompt)

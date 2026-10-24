@@ -1,36 +1,23 @@
 import { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://ganeshnexgen.com";
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://ganeshnexgen.website";
 
-  const routes = [
-    "",
-    "/about",
-    "/services",
-    "/services/web-development",
-    "/services/ecommerce-development",
-    "/services/custom-software",
-    "/services/ui-ux-design",
-    "/services/ai-automation",
-    "/services/startup-solutions",
-    "/services/cloud-deployment",
-    "/services/maintenance",
-    "/solutions/business-growth",
-    "/solutions/ai-automation",
-    "/industries",
-    "/portfolio",
-    "/pricing",
-    "/faq",
-    "/contact",
-    "/privacy",
-    "/terms",
-    "/refund",
+  const routes: { path: string; priority: number; changeFrequency: "daily" | "weekly" | "monthly" }[] = [
+    { path: "", priority: 1.0, changeFrequency: "daily" },
+    { path: "/about", priority: 0.9, changeFrequency: "weekly" },
+    { path: "/work", priority: 0.9, changeFrequency: "weekly" },
+    { path: "/case-studies", priority: 0.85, changeFrequency: "weekly" },
+    { path: "/why-us", priority: 0.85, changeFrequency: "weekly" },
+    { path: "/contact", priority: 0.9, changeFrequency: "weekly" },
+    { path: "/privacy", priority: 0.5, changeFrequency: "monthly" },
+    { path: "/terms", priority: 0.5, changeFrequency: "monthly" },
   ];
 
-  return routes.map((route) => ({
-    url: `${baseUrl}${route}`,
+  return routes.map((item) => ({
+    url: `${baseUrl}${item.path}`,
     lastModified: new Date(),
-    changeFrequency: "weekly",
-    priority: route === "" ? 1.0 : 0.8,
+    changeFrequency: item.changeFrequency,
+    priority: item.priority,
   }));
 }

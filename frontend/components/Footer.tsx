@@ -53,10 +53,22 @@ export default function Footer() {
                 ABOUT
               </Link>
               <Link
-                href="/#contact"
+                href="/contact"
                 className="font-display text-xs font-bold tracking-[0.14em] text-white/70 transition-colors hover:text-[#2D8CF0]"
               >
                 CONTACT
+              </Link>
+              <Link
+                href="/privacy"
+                className="font-display text-xs font-bold tracking-[0.14em] text-white/70 transition-colors hover:text-[#2D8CF0]"
+              >
+                PRIVACY
+              </Link>
+              <Link
+                href="/terms"
+                className="font-display text-xs font-bold tracking-[0.14em] text-white/70 transition-colors hover:text-[#2D8CF0]"
+              >
+                TERMS
               </Link>
             </nav>
           </div>
@@ -68,10 +80,10 @@ export default function Footer() {
             </p>
             <div className="mt-3 flex flex-col gap-1.5">
               <a
-                href="mailto:contact@ganeshnexgen.com"
+                href="mailto:contact@ganeshnexgen.website"
                 className="font-display text-sm font-bold tracking-wide text-white transition-colors hover:text-[#2D8CF0]"
               >
-                contact@ganeshnexgen.com
+                contact@ganeshnexgen.website
               </a>
             </div>
             <p className="mt-2 text-xs font-medium text-white/50 max-w-xs">
@@ -86,7 +98,7 @@ export default function Footer() {
             </p>
             <div className="mt-3 flex flex-col gap-2.5">
               <a
-                href="mailto:contact@ganeshnexgen.com"
+                href="mailto:contact@ganeshnexgen.website"
                 className="group inline-flex w-fit items-center gap-2.5 font-display text-xs font-bold tracking-wide text-white/80 transition-colors hover:text-white"
               >
                 <span className="grid size-7 place-items-center rounded-md bg-white/10 transition-colors group-hover:bg-white/20">
@@ -109,8 +121,13 @@ export default function Footer() {
       </div>
 
       {/* Copyright Bar */}
-      <div className="border-t border-white/10 py-5 text-center font-display text-[0.65rem] font-bold tracking-[0.2em] text-white/40">
-        © 2026 GANESH NEXGEN SOLUTIONS — ENGINEERED WITH PRECISION
+      <div className="border-t border-white/10 py-5 text-center font-display text-[0.65rem] font-bold tracking-[0.2em] text-white/40 flex flex-col sm:flex-row items-center justify-center gap-3">
+        <span>© 2026 GANESH NEXGEN SOLUTIONS — ALL RIGHTS RESERVED</span>
+        <span className="hidden sm:inline">•</span>
+        <div className="flex gap-4">
+          <Link href="/privacy" className="hover:text-white transition-colors">PRIVACY POLICY</Link>
+          <Link href="/terms" className="hover:text-white transition-colors">TERMS OF SERVICE</Link>
+        </div>
       </div>
     </footer>
   );
