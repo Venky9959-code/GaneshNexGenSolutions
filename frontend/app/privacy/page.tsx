@@ -6,11 +6,31 @@ import FloatingEnquiry from "@/components/FloatingEnquiry";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy | Ganesh NexGen Solutions",
+  title: "Privacy Policy",
   description:
     "Privacy Policy for Ganesh NexGen Solutions. Learn how we handle, store, and protect your data with bank-grade security protocols.",
   alternates: {
-    canonical: "https://ganeshnexgen.website/privacy",
+    canonical: "/privacy",
+  },
+  openGraph: {
+    title: "Privacy Policy | Ganesh NexGen Solutions",
+    description: "Learn how Ganesh NexGen Solutions protects your data and enforces strict security protocols.",
+    url: "https://ganeshnexgen.website/privacy",
+    type: "website",
+    images: [
+      {
+        url: "/brand/logo.png",
+        width: 1200,
+        height: 630,
+        alt: "Ganesh NexGen Solutions Privacy Policy",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Privacy Policy | Ganesh NexGen Solutions",
+    description: "Learn how Ganesh NexGen Solutions protects your data and enforces strict security protocols.",
+    images: ["/brand/logo.png"],
   },
 };
 

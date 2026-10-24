@@ -25,19 +25,25 @@ export const metadata: Metadata = {
   },
   description:
     "Ganesh NexGen Solutions is an elite software engineering and AI automation studio. We engineer custom enterprise software, build high-speed websites, and deploy intelligent AI bots so your business looks big and moves fast.",
+  applicationName: "Ganesh NexGen Solutions",
   keywords: [
     "custom software development",
     "web development India",
-    "AI automation",
+    "AI automation workflows",
     "WhatsApp bot development",
     "Shopify store development",
     "ERP software India",
     "Next.js web developer",
+    "enterprise software solutions",
+    "full stack engineering",
+    "automated lead generation bots",
+    "high-speed website optimization",
     "Ganesh NexGen Solutions",
   ],
   authors: [{ name: "Ganesh NexGen Solutions", url: "https://ganeshnexgen.website" }],
   creator: "Ganesh NexGen Solutions",
   publisher: "Ganesh NexGen Solutions",
+  category: "technology",
   formatDetection: {
     email: true,
     address: true,
@@ -58,7 +64,7 @@ export const metadata: Metadata = {
         url: "/brand/logo.png",
         width: 1200,
         height: 630,
-        alt: "Ganesh NexGen Solutions Logo",
+        alt: "Ganesh NexGen Solutions — Software & AI Automation Studio",
       },
     ],
   },
@@ -92,62 +98,124 @@ export const metadata: Metadata = {
 
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "ProfessionalService",
-  name: "Ganesh NexGen Solutions",
-  url: "https://ganeshnexgen.website",
-  logo: "https://ganeshnexgen.website/brand/logo.png",
-  image: "https://ganeshnexgen.website/brand/logo.png",
-  description:
-    "Engineering custom enterprise software, ultra-fast websites, and intelligent AI automation workflows for ambitious businesses.",
-  email: "contact@ganeshnexgen.website",
-  telephone: "+91 9390564946",
-  priceRange: "₹₹",
-  address: {
-    "@type": "PostalAddress",
-    addressCountry: "IN",
-  },
-  openingHoursSpecification: [
+  "@graph": [
     {
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: [
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday",
+      "@type": "WebSite",
+      "@id": "https://ganeshnexgen.website/#website",
+      url: "https://ganeshnexgen.website",
+      name: "Ganesh NexGen Solutions",
+      description: "Custom Software, High-Speed Websites & AI Automation Studio",
+      publisher: {
+        "@id": "https://ganeshnexgen.website/#organization",
+      },
+      inLanguage: "en-IN",
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://ganeshnexgen.website/#organization",
+      name: "Ganesh NexGen Solutions",
+      url: "https://ganeshnexgen.website",
+      logo: {
+        "@type": "ImageObject",
+        url: "https://ganeshnexgen.website/brand/logo.png",
+        width: 1200,
+        height: 630,
+      },
+      image: "https://ganeshnexgen.website/brand/logo.png",
+      email: "contact@ganeshnexgen.website",
+      telephone: "+91 9390564946",
+      sameAs: [
+        "https://wa.me/919390564946",
       ],
-      opens: "09:00",
-      closes: "20:00",
+      contactPoint: [
+        {
+          "@type": "ContactPoint",
+          telephone: "+91 9390564946",
+          contactType: "customer service",
+          email: "contact@ganeshnexgen.website",
+          areaServed: ["IN", "US", "AE", "GB", "Worldwide"],
+          availableLanguage: ["English", "Telugu", "Hindi"],
+        },
+      ],
+    },
+    {
+      "@type": "ProfessionalService",
+      "@id": "https://ganeshnexgen.website/#localbusiness",
+      name: "Ganesh NexGen Solutions",
+      url: "https://ganeshnexgen.website",
+      logo: "https://ganeshnexgen.website/brand/logo.png",
+      image: "https://ganeshnexgen.website/brand/logo.png",
+      description:
+        "Engineering custom enterprise software, ultra-fast websites, and intelligent AI automation workflows for ambitious businesses.",
+      email: "contact@ganeshnexgen.website",
+      telephone: "+91 9390564946",
+      priceRange: "₹₹",
+      currenciesAccepted: "INR, USD",
+      paymentAccepted: "Cash, Credit Card, UPI, Net Banking, Razorpay",
+      address: {
+        "@type": "PostalAddress",
+        addressCountry: "IN",
+      },
+      geo: {
+        "@type": "GeoCoordinates",
+        latitude: 17.385044,
+        longitude: 78.486671,
+      },
+      openingHoursSpecification: [
+        {
+          "@type": "OpeningHoursSpecification",
+          dayOfWeek: [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+          ],
+          opens: "09:00",
+          closes: "20:00",
+        },
+      ],
+      hasOfferCatalog: {
+        "@type": "OfferCatalog",
+        name: "Engineering & Development Services",
+        itemListElement: [
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              name: "Custom Software & Enterprise ERP Development",
+              description: "Tailor-made cloud software, database architectures, and secure business management systems.",
+            },
+          },
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              name: "High-Performance Website Development",
+              description: "Sub-second load times, modern Next.js/React responsive UI, and search engine optimized web platforms.",
+            },
+          },
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              name: "24/7 AI WhatsApp Automation & Customer Bots",
+              description: "Autonomous AI chatbots for lead qualification, instant booking, and CRM synchronization.",
+            },
+          },
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              name: "E-Commerce & High-Converting Shopify Architectures",
+              description: "Full-funnel e-commerce stores with automated payment gateways, inventory tracking, and speed optimization.",
+            },
+          },
+        ],
+      },
     },
   ],
-  hasOfferCatalog: {
-    "@type": "OfferCatalog",
-    name: "Engineering & Development Services",
-    itemListElement: [
-      {
-        "@type": "Offer",
-        itemOffered: {
-          "@type": "Service",
-          name: "Custom Software & Enterprise ERP Development",
-        },
-      },
-      {
-        "@type": "Offer",
-        itemOffered: {
-          "@type": "Service",
-          name: "High-Performance Website Development",
-        },
-      },
-      {
-        "@type": "Offer",
-        itemOffered: {
-          "@type": "Service",
-          name: "24/7 AI WhatsApp Automation & Customer Bots",
-        },
-      },
-    ],
-  },
 };
 
 export default function RootLayout({

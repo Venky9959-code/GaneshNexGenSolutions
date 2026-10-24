@@ -6,11 +6,31 @@ import FloatingEnquiry from "@/components/FloatingEnquiry";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Terms of Service | Ganesh NexGen Solutions",
+  title: "Terms of Service",
   description:
     "Terms of Service for Ganesh NexGen Solutions. Review our engineering engagement terms, intellectual property protections, and service agreements.",
   alternates: {
-    canonical: "https://ganeshnexgen.website/terms",
+    canonical: "/terms",
+  },
+  openGraph: {
+    title: "Terms of Service | Ganesh NexGen Solutions",
+    description: "Review our engineering engagement terms, intellectual property protections, and service agreements.",
+    url: "https://ganeshnexgen.website/terms",
+    type: "website",
+    images: [
+      {
+        url: "/brand/logo.png",
+        width: 1200,
+        height: 630,
+        alt: "Ganesh NexGen Solutions Terms of Service",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Terms of Service | Ganesh NexGen Solutions",
+    description: "Review our engineering engagement terms, intellectual property protections, and service agreements.",
+    images: ["/brand/logo.png"],
   },
 };
 
