@@ -19,6 +19,10 @@ export async function sendInquiryEmails(data: InquiryData) {
     process.env.ADMIN_EMAIL ||
     "ganeshnexgen.co@gmail.com";
 
+  const OFFICIAL_WHATSAPP_NUMBER = "919390564946";
+  const OFFICIAL_WHATSAPP_DISPLAY = "+91 9390564946";
+  const OFFICIAL_WHATSAPP_URL = `https://wa.me/${OFFICIAL_WHATSAPP_NUMBER}?text=Hi%20Ganesh%20NexGen%20Team,%20my%20inquiry%20reference%20is%20${encodeURIComponent(data.leadNumber)}`;
+
   console.log(
     `[Inquiry Engine] Processing inquiry notification for lead ${data.leadNumber}`
   );
@@ -63,6 +67,22 @@ export async function sendInquiryEmails(data: InquiryData) {
             month: "short",
             year: "numeric",
           }),
+
+          // WhatsApp link variables for template footer button (pointing to +91 9390564946)
+          whatsapp_url: OFFICIAL_WHATSAPP_URL,
+          whatsapp_link: OFFICIAL_WHATSAPP_URL,
+          whatsapp_btn: OFFICIAL_WHATSAPP_URL,
+          chat_whatsapp_url: OFFICIAL_WHATSAPP_URL,
+          chat_whatsapp_link: OFFICIAL_WHATSAPP_URL,
+          whatsapp_chat_url: OFFICIAL_WHATSAPP_URL,
+          company_whatsapp: OFFICIAL_WHATSAPP_URL,
+          company_whatsapp_url: OFFICIAL_WHATSAPP_URL,
+          support_whatsapp: OFFICIAL_WHATSAPP_URL,
+          whatsapp: OFFICIAL_WHATSAPP_DISPLAY,
+          whatsapp_number: OFFICIAL_WHATSAPP_DISPLAY,
+          company_phone: OFFICIAL_WHATSAPP_DISPLAY,
+          support_phone: OFFICIAL_WHATSAPP_DISPLAY,
+
           // Nested object for templates using {{data.key}}
           data: {
             name: data.name,
@@ -73,6 +93,11 @@ export async function sendInquiryEmails(data: InquiryData) {
             email: data.email,
             phone: data.phone,
             notes: data.notes || "None provided",
+            whatsapp_url: OFFICIAL_WHATSAPP_URL,
+            whatsapp_link: OFFICIAL_WHATSAPP_URL,
+            whatsapp: OFFICIAL_WHATSAPP_DISPLAY,
+            whatsapp_number: OFFICIAL_WHATSAPP_DISPLAY,
+            company_phone: OFFICIAL_WHATSAPP_DISPLAY,
           },
           // Flat dot-notation keys
           "data.name": data.name,
@@ -80,6 +105,9 @@ export async function sendInquiryEmails(data: InquiryData) {
           "data.service": data.service,
           "data.budget": data.budget,
           "data.timeline": data.timeline,
+          "data.whatsapp_url": OFFICIAL_WHATSAPP_URL,
+          "data.whatsapp_link": OFFICIAL_WHATSAPP_URL,
+          "data.whatsapp": OFFICIAL_WHATSAPP_DISPLAY,
         },
       };
 
@@ -204,8 +232,8 @@ export async function sendInquiryEmails(data: InquiryData) {
                 }
 
                 <div style="margin-top: 24px; padding-top: 18px; border-top: 1px solid #E2E8F0; text-align: center;">
-                  <a href="https://wa.me/${data.phone.replace(/[^0-9]/g, "")}" style="display: inline-block; background-color: #25D366; color: #FFFFFF; font-weight: bold; text-decoration: none; padding: 10px 20px; border-radius: 8px; margin-right: 8px; font-size: 13px;">
-                    💬 Open WhatsApp Chat
+                  <a href="${OFFICIAL_WHATSAPP_URL}" style="display: inline-block; background-color: #25D366; color: #FFFFFF; font-weight: bold; text-decoration: none; padding: 10px 20px; border-radius: 8px; margin-right: 8px; font-size: 13px;">
+                    💬 Chat on WhatsApp (+91 9390564946)
                   </a>
                   <a href="mailto:${data.email}?subject=Regarding Your Inquiry with Ganesh NexGen Co (${data.leadNumber})" style="display: inline-block; background-color: #0F172A; color: #FFFFFF; font-weight: bold; text-decoration: none; padding: 10px 20px; border-radius: 8px; font-size: 13px;">
                     ✉️ Reply via Email
@@ -286,8 +314,8 @@ export async function sendInquiryEmails(data: InquiryData) {
                     <p style="margin: 0 0 14px 0; font-size: 13px; color: #64748B;">
                       Need immediate assistance or want to share documents?
                     </p>
-                    <a href="https://wa.me/919390564946?text=Hi%20Ganesh%20NexGen%20Team,%20my%20inquiry%20reference%20is%20${data.leadNumber}" style="display: inline-block; background-color: #25D366; color: #FFFFFF; font-weight: 700; text-decoration: none; padding: 12px 28px; border-radius: 8px; font-size: 14px; box-shadow: 0 2px 6px rgba(37, 211, 102, 0.25);">
-                      💬 Chat Directly on WhatsApp
+                    <a href="${OFFICIAL_WHATSAPP_URL}" style="display: inline-block; background-color: #25D366; color: #FFFFFF; font-weight: 700; text-decoration: none; padding: 12px 28px; border-radius: 8px; font-size: 14px; box-shadow: 0 2px 6px rgba(37, 211, 102, 0.25);">
+                      💬 Chat Directly on WhatsApp (+91 9390564946)
                     </a>
                   </div>
 
