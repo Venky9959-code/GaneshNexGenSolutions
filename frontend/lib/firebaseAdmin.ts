@@ -36,13 +36,13 @@ export function getAdminFirestore() {
     if (serviceAccount) {
       const app = initializeApp({
         credential: cert(serviceAccount),
-        projectId: serviceAccount.project_id || "lead-tracker-8e597",
+        projectId: serviceAccount.project_id || "lead-tracker-1c4a3",
       });
       return getFirestore(app);
     }
 
     const app = initializeApp({
-      projectId: process.env.FIREBASE_PROJECT_ID || "lead-tracker-8e597",
+      projectId: process.env.FIREBASE_PROJECT_ID || "lead-tracker-1c4a3",
     });
     return getFirestore(app);
   } catch (err) {
