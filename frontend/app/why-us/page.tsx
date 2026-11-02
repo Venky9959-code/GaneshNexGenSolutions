@@ -51,7 +51,7 @@ export default function WhyUsPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
-    <main className="min-h-screen bg-[#F0F4F8] text-[#0B172A]">
+    <main id="main-content" className="min-h-screen bg-[#F0F4F8] text-[#0B172A]">
       <Navbar onOpenProjectModal={() => setIsModalOpen(true)} />
       <FloatingEnquiry onOpenProjectModal={() => setIsModalOpen(true)} />
 

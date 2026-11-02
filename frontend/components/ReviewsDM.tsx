@@ -345,7 +345,10 @@ export default function ReviewsDM({ onOpenProjectModal }: ReviewsDMProps) {
             >
               <img
                 src="/brand/logo.png"
-                alt="GN"
+                alt="Ganesh NexGen Co"
+                width={28}
+                height={28}
+                loading="lazy"
                 className="size-6 object-contain inline-block transition-transform duration-300 group-hover:rotate-90 sm:size-7"
               />
               GET YOUR WEBSITE TODAY

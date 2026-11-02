@@ -16,6 +16,9 @@ export default function CallToAction({ onOpenProjectModal }: CallToActionProps) 
           <img
             src="/brand/logo.png"
             alt="Ganesh NexGen Co Logo"
+            width={44}
+            height={44}
+            loading="lazy"
             className="size-11 object-contain"
           />
         </div>

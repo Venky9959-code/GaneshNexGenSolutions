@@ -188,7 +188,9 @@ export default function Hero({ onOpenProjectModal }: HeroProps) {
               <span className="grid size-12 place-items-center rounded-full bg-white border-2 border-ink shadow-[2px_2px_0_0_#2D8CF0] p-1.5">
                 <img
                   src="/brand/logo.png"
-                  alt="GN"
+                  alt="Ganesh NexGen emblem"
+                  width={24}
+                  height={24}
                   className="size-6 object-contain"
                 />
               </span>

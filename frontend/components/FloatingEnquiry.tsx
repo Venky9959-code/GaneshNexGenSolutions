@@ -118,7 +118,9 @@ export default function FloatingEnquiry({ onOpenProjectModal }: FloatingEnquiryP
         <div className="grid size-8 sm:size-9 place-items-center rounded-full bg-white p-1 border border-ink/15 shadow-sm transition-transform duration-300 group-hover:scale-110 group-hover:rotate-12">
           <img
             src="/brand/logo.png"
-            alt="GN"
+            alt="Ganesh NexGen Emblem"
+            width={28}
+            height={28}
             className="size-6 object-contain inline-block transition-transform duration-300 group-hover:rotate-90 sm:size-7"
           />
         </div>

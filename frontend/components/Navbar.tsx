@@ -34,6 +34,8 @@ export default function Navbar({ onOpenProjectModal, dark = false }: NavbarProps
             <img
               src="/brand/logo.png"
               alt="Ganesh NexGen Co Logo"
+              width={24}
+              height={24}
               className="size-6 object-contain"
             />
           </span>

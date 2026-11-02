@@ -23,6 +23,20 @@ export interface ProjectItem {
 
 export const PROJECTS: ProjectItem[] = [
   {
+    id: "magical-noodles",
+    name: "MAGICAL NOODLES",
+    tag: "FOOD & BRANDING",
+    description: "Modern fast-casual dining experience with an appetizing visual menu, fast mobile ordering, and snappy checkout.",
+    initials: "MN",
+    coverBg: "bg-orange text-cream",
+    initialsColor: "text-cream",
+    metrics: "Live Web App ↗",
+    url: "https://magicalnoodles.vercel.app",
+    displayUrl: "magicalnoodles.vercel.app",
+    image: "/projects/magicalnoodles.png",
+    video: "/work_videos/magicalnoodles.mp4",
+  },
+  {
     id: "add-your-project",
     name: "ADD YOUR PROJECT NEXT",
     tag: "YOUR BRAND HERE",

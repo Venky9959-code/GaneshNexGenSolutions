@@ -260,7 +260,7 @@ export default function WorkPage() {
   });
 
   return (
-    <main className="bg-ink text-cream min-h-screen">
+    <main id="main-content" className="bg-ink text-cream min-h-screen">
       {/* Dark Neo-Brutalist Navbar matching aijugaad.co work page */}
       <Navbar dark={true} onOpenProjectModal={() => setIsModalOpen(true)} />
       <FloatingEnquiry onOpenProjectModal={() => setIsModalOpen(true)} />

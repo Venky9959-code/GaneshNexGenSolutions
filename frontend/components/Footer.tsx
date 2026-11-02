@@ -14,6 +14,9 @@ export default function Footer() {
                 <img
                   src="/brand/logo.png"
                   alt="Ganesh NexGen Co Logo"
+                  width={28}
+                  height={28}
+                  loading="lazy"
                   className="size-7 object-contain"
                 />
               </div>

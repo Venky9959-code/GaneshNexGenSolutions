@@ -31,10 +31,10 @@ export async function sendInquiryEmails(data: InquiryData) {
   let smtpDispatched = false;
 
   // 1. PRIMARY: EmailJS Automated Confirmation (Dispatched via ganeshnexgen.co@gmail.com)
-  const emailJsServiceId = process.env.EMAILJS_SERVICE_ID || "service_pxn8ruk";
-  const emailJsTemplateId = process.env.EMAILJS_TEMPLATE_ID || "template_bdvl026";
-  const emailJsPublicKey = process.env.EMAILJS_PUBLIC_KEY || "tEyuktmK30LeGqW-h";
-  const emailJsPrivateKey = process.env.EMAILJS_PRIVATE_KEY || "YtActWRVau_WR5UGUx38q";
+  const emailJsServiceId = process.env.EMAILJS_SERVICE_ID;
+  const emailJsTemplateId = process.env.EMAILJS_TEMPLATE_ID;
+  const emailJsPublicKey = process.env.EMAILJS_PUBLIC_KEY;
+  const emailJsPrivateKey = process.env.EMAILJS_PRIVATE_KEY;
 
   if (emailJsServiceId && emailJsTemplateId && emailJsPublicKey) {
     try {

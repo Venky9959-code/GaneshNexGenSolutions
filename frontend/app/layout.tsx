@@ -247,6 +247,12 @@ export default function RootLayout({
         />
       </head>
       <body className="antialiased">
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[999] focus:rounded-xl focus:border-2 focus:border-ink focus:bg-yellow focus:px-4 focus:py-2 focus:font-display focus:text-xs focus:font-black focus:text-ink focus:shadow-[3px_3px_0_0_#141414] focus:outline-none"
+        >
+          Skip to main content
+        </a>
         <TapEffect />
         {children}
       </body>

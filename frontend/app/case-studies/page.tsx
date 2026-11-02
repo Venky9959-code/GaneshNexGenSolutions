@@ -53,7 +53,7 @@ export default function CaseStudiesPage() {
   const [selectedStudy, setSelectedStudy] = useState<CaseStudy | null>(null);
 
   return (
-    <main className="bg-cream text-ink min-h-screen">
+    <main id="main-content" className="bg-cream text-ink min-h-screen">
       {/* Light Neo-Brutalist Navbar matching aijugaad.co case studies page */}
       <Navbar onOpenProjectModal={() => setIsModalOpen(true)} />
       <FloatingEnquiry onOpenProjectModal={() => setIsModalOpen(true)} />

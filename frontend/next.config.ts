@@ -2,12 +2,12 @@ import type { NextConfig } from "next";
 
 const cspHeader = `
   default-src 'self';
-  script-src 'self' 'unsafe-inline' 'unsafe-eval' https://api.emailjs.com;
+  script-src 'self' 'unsafe-inline' 'unsafe-eval' https://api.emailjs.com https://www.googletagmanager.com;
   style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
   img-src 'self' blob: data: https:;
   font-src 'self' https://fonts.gstatic.com data:;
   media-src 'self' blob: data:;
-  connect-src 'self' https://api.emailjs.com https://*.firebaseio.com https://*.googleapis.com https://api.resend.com;
+  connect-src 'self' https://api.emailjs.com https://*.firebaseio.com https://*.googleapis.com https://api.resend.com https://www.google-analytics.com https://*.google-analytics.com https://region1.google-analytics.com;
   object-src 'none';
   base-uri 'self';
   form-action 'self' https://wa.me mailto:;
@@ -75,6 +75,24 @@ const nextConfig: NextConfig = {
       },
       {
         source: "/projects/:path*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          },
+        ],
+      },
+      {
+        source: "/work_videos/:path*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          },
+        ],
+      },
+      {
+        source: "/images/:path*",
         headers: [
           {
             key: "Cache-Control",

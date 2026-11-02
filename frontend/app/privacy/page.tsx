@@ -36,7 +36,7 @@ export const metadata: Metadata = {
 
 export default function PrivacyPage() {
   return (
-    <main className="min-h-screen bg-[#F0F4F8] text-[#0B172A]">
+    <main id="main-content" className="min-h-screen bg-[#F0F4F8] text-[#0B172A]">
       <Navbar />
       <FloatingEnquiry />
 

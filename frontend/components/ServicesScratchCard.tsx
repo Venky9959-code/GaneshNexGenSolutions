@@ -169,8 +169,16 @@ function ScratchCanvas({ onDone, reveal = "TO SEE WHAT WE DO" }: ScratchCanvasPr
     >
       <canvas
         ref={canvasRef}
-        className="h-full w-full touch-none select-none"
-        aria-label="Scratch card — swipe to reveal our services"
+        tabIndex={0}
+        role="button"
+        className="h-full w-full touch-none select-none focus:outline-none focus-visible:ring-4 focus-visible:ring-ink"
+        aria-label="Scratch card — swipe or press Enter to reveal our services"
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            onDone();
+          }
+        }}
         onPointerDown={(e) => {
           try {
             canvasRef.current?.setPointerCapture(e.pointerId);

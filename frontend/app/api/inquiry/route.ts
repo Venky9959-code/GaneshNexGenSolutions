@@ -22,17 +22,64 @@ function cleanupOldRecords() {
   }
 }
 
+function cleanString(val: any, maxLength: number): string {
+  if (typeof val !== "string") return "";
+  return val.replace(/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/g, "").trim().slice(0, maxLength);
+}
+
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { name, email, phone, service, budget, timeline, notes, sessionId } = body;
 
-    if (!name || (!phone && !email)) {
+    // Silent drop for automated spam bots filling hidden honeypot
+    if (body.honeypot && String(body.honeypot).trim().length > 0) {
+      return NextResponse.json({
+        success: true,
+        leadNumber: `GNS-${Math.floor(100000 + Math.random() * 900000)}`,
+        message: "Inquiry received.",
+      });
+    }
+
+    const {
+      name,
+      email,
+      phone,
+      service,
+      budget,
+      timeline,
+      notes,
+      sessionId,
+      brandName,
+      website,
+      problems,
+      problemsOther,
+      brief,
+    } = body;
+
+    const cleanName = cleanString(name, 60);
+    const cleanEmail = cleanString(email, 120);
+    const cleanPhone = cleanString(phone, 25);
+
+    if (!cleanName || (!cleanPhone && !cleanEmail)) {
       return NextResponse.json(
         { success: false, error: "Name and at least one contact method (phone or email) are required." },
         { status: 400 }
       );
     }
+
+    // Combine any extra fields into consolidated notes
+    const extraNotes = [
+      notes ? cleanString(notes, 2000) : null,
+      brief ? `Project Brief: ${cleanString(brief, 3000)}` : null,
+      brandName ? `Brand Name: ${cleanString(brandName, 100)}` : null,
+      website ? `Website: ${cleanString(website, 200)}` : null,
+      problems && (Array.isArray(problems) ? problems.length > 0 : Boolean(problems))
+        ? `What to Fix: ${Array.isArray(problems) ? problems.map((p) => cleanString(p, 60)).join(", ") : cleanString(problems, 200)}`
+        : null,
+      problemsOther ? `Other Details: ${cleanString(problemsOther, 300)}` : null,
+    ]
+      .filter(Boolean)
+      .join("\n\n");
 
     // Determine client tracking key from sessionId or IP
     const forwarded = request.headers.get("x-forwarded-for");
@@ -68,13 +115,13 @@ export async function POST(request: Request) {
 
     const inquiryPayload: InquiryData = {
       leadNumber,
-      name: String(name).trim(),
-      email: String(email || "").trim(),
-      phone: String(phone || "").trim(),
-      service: String(service || "Custom Software / Web").trim(),
-      budget: String(budget || "To Discuss").trim(),
-      timeline: String(timeline || "Flexible").trim(),
-      notes: notes ? String(notes).trim() : "",
+      name: cleanName,
+      email: cleanEmail,
+      phone: cleanPhone,
+      service: cleanString(service, 120) || "Custom Software / Web",
+      budget: cleanString(budget, 80) || "To Discuss",
+      timeline: cleanString(timeline, 80) || "Standard",
+      notes: extraNotes ? String(extraNotes).trim() : (notes ? cleanString(notes, 2000) : ""),
       createdAt: nowIso,
     };
 
